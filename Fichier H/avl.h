@@ -11,3 +11,5 @@ typedef struct AVL{
 	struct arbre* fd;
 	int equilibre;
 }AVL;
+
+
