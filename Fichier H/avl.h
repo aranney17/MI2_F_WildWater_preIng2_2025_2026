@@ -4,9 +4,17 @@
 #include <math.h>
 #include <string.h>
 
+typedef struct {
+	char* id;
+	double vol_max;
+	double vol_capte;
+	double vol_reel;
+} Usine;
+
 //structure AVL
 typedef struct AVL{
-	int val;
+	char* id;
+	Usine* usine;
 	struct arbre* fg;
 	struct arbre* fd;
 	int equilibre;
