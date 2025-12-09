@@ -1,14 +1,44 @@
 #include "avl.h"
 
-int max(int a,int b){
-	if(a>b){
+
+pArbre creerArbre(char* identifiant, Usine u){
+	pArbre noeud = malloc(sizeof(Arbre));
+	if(noeud == NULL){
+		exit(1);
+	}
+	noeud->id = identifiant;
+	*(noeud->usine) = u;
+	noeud->fg = NULL;
+	noeud->fd = NULL;
+	noeud->equilibre = 0;
+	return noeud;
+}
+
+int recherche(pArbre a, char* identifiant, int* nb){
+	if(a == NULL){
+		return 0;
+	}
+	if(strcmp(a->id, identifiant) == 0){
+		*nb = 1;
+		return 1;
+	}
+	if(strcmp(a->id, identifiant) > 0){
+		*nb += 1;
+		return recherche(a->fg, identifiant, nb);
+	}
+	*nb+=1;
+	return recherche(a->fd, identifiant, nb);
+}
+
+int max(int a, int b){
+	if(a >= b){
 		return a;
 	}
 	return b;
 }
 
 int min(int a,int b){
-	if(a<b){
+	if(a <= b){
 		return a;
 	}
 	return b;
@@ -18,14 +48,14 @@ pArbre rotationDroite(pArbre a){
 	pArbre pivot;
 	int eq_a;
 	int eq_p;
-	pivot=a->fg;
-	a->fg=pivot->fd;
-	pivot->fd=a;
-	eq_a=a->equilibre;
-	eq_p=pivot->equilibre;
-	a->equilibre=eq_a - min(eq_p,0)+1;
-	pivot->equilibre=max(eq_a+2,max(eq_a+eq_p+2,eq_p+1));
-	a=pivot;
+	pivot = a->fg;
+	a->fg = pivot->fd;
+	pivot->fd = a;
+	eq_a = a->equilibre;
+	eq_p = pivot->equilibre;
+	a->equilibre = eq_a - min(eq_p,0)+1;
+	pivot->equilibre = max(eq_a+2,max(eq_a+eq_p+2,eq_p+1));
+	a = pivot;
 	return a;
 }
 
@@ -33,13 +63,81 @@ pArbre rotationGauche(pArbre a){
 	pArbre pivot;
 	int eq_a;
 	int eq_p;
-	pivot=a->fd;
-	a->fd=pivot->fg;
-	pivot->fg=a;
-	eq_a=a->equilibre;
-	eq_p=pivot->equilibre;
-	a->equilibre=eq_a - max(eq_p,0)-1;
-	pivot->equilibre=min(eq_a-2,min(eq_a+eq_p-2,eq_p-1));
-	a=pivot;
+	pivot = a->fd;
+	a->fd = pivot->fg;
+	pivot->fg = a;
+	eq_a = a->equilibre;
+	eq_p = pivot->equilibre;
+	a->equilibre = eq_a - max(eq_p,0)-1;
+	pivot->equilibre = min(eq_a-2,min(eq_a+eq_p-2,eq_p-1));
+	a = pivot;
+	return a;
+}
+
+pArbre doubleRotationGauche(pArbre a){
+	if(a == NULL){
+		exit(1);
+	}
+	a->fd = rotationDroite(a->fd);
+	return rotationGauche(a);
+}
+
+pArbre doubleRotationDroite(pArbre a){
+	if(a == NULL){
+		exit(1);
+	}
+	a->fd = rotationGauche(a->fg);
+	return rotationDroite(a);
+}
+
+
+pArbre equilibreAVL(pArbre a){
+	if(a == NULL){
+		exit(1);
+	}
+	if(a->equilibre >= 2){
+		if(a->fd->equilibre >= 0){
+			return rotationGauche(a);
+		}
+		else{
+			return doubleRotationGauche(a);
+		}
+	}
+	else if(a->equilibre <= -2){
+		if(a->fg->equilibre <= 0){
+			return rotationDroite(a);
+		}
+		else{
+			return doubleRotationDroite(a);
+		}
+	}
+}
+
+pArbre insertionAVL(pArbre a, char* identifiant, Usine* u, int* h){
+	if(a == NULL){
+		*h = 1;
+		return creerArbre(identifiant, *u);
+	}
+	if(strcmp(a->id, identifiant) > 0){
+		a->fg = insertionAVL(a->fg, identifiant, u, h);
+		*h = -*h;
+	}
+	else if(strcmp(identifiant, a->id) > 0){
+		a->fd = insertionAVL(a->fd, identifiant, u, h);
+	}
+	else{
+		*h = 0;
+		return a;
+	}
+	if(*h != 0){
+		a->equilibre += *h;
+		a = equilibreAVL(a);
+		if(a->equilibre == 0){
+			*h = 0;
+		}
+		else{
+			*h = 1;
+		}
+	}
 	return a;
 }
