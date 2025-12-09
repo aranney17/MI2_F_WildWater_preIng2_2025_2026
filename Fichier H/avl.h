@@ -11,13 +11,12 @@ typedef struct {
 	double vol_reel;
 } Usine;
 
-//structure AVL
-typedef struct AVL{
+typedef struct arbre {
 	char* id;
 	Usine* usine;
 	struct arbre* fg;
 	struct arbre* fd;
 	int equilibre;
-}AVL;
+} Arbre;
 
-
+typedef struct arbre* pArbre;
