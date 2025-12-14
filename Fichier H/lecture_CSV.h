@@ -6,3 +6,4 @@ typedef struct {
 	char* leak;
 }Info;
 
+typedef enum { SOURCE_USINE, USINE, USINE_STOCKAGE, STOCKAGE_JONCTION, JONCTION_RACC, RACC_USAGER, INCONNU } TypeLigne;
