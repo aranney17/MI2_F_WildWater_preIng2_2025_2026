@@ -4,6 +4,7 @@ typedef struct {
 	char* col3;
 	char* volume;
 	char* leak;
+	Type_ligne type;
 }Info;
 
-typedef enum { SOURCE_USINE, USINE, USINE_STOCKAGE, STOCKAGE_JONCTION, JONCTION_RACC, RACC_USAGER, INCONNU } TypeLigne;
+typedef enum { SOURCE_USINE, USINE, USINE_STOCKAGE, STOCKAGE_JONCTION, JONCTION_RACC, RACC_USAGER, INCONNU } Type_ligne;
