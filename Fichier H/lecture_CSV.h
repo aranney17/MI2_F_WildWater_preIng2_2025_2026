@@ -12,7 +12,7 @@ typedef struct {
 	char* volume;
 	char* leak;
 	Type_ligne type;
-}Ligne;
+} Ligne;
 
 //Enumération type de ligne
 typedef enum { 
