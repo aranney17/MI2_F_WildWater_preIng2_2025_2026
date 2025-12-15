@@ -1,3 +1,10 @@
+// Bibliothèques
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <string.h>
+
+//Structure ligne
 typedef struct {
 	char* col1;
 	char* col2;
@@ -5,6 +12,9 @@ typedef struct {
 	char* volume;
 	char* leak;
 	Type_ligne type;
-}Info;
+}Ligne;
 
-typedef enum { SOURCE_USINE, USINE, USINE_STOCKAGE, STOCKAGE_JONCTION, JONCTION_RACC, RACC_USAGER, INCONNU } Type_ligne;
+//Enumération type de ligne
+typedef enum { 
+	SOURCE_USINE, USINE, USINE_STOCKAGE, STOCKAGE_JONCTION, JONCTION_RACC, RACC_USAGER, INCONNU
+} Type_ligne;
