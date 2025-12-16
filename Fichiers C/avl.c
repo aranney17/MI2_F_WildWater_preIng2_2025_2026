@@ -7,7 +7,7 @@ pArbre creerArbre(char* identifiant, Usine u){
 		exit(1);
 	}
 	noeud->id = identifiant;
-	*(noeud->usine) = u;
+	noeud->usine = u;
 	noeud->fg = NULL;
 	noeud->fd = NULL;
 	noeud->equilibre = 0;
