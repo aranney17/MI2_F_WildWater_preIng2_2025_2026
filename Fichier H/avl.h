@@ -21,5 +21,10 @@ typedef struct arbre {
 
 typedef struct AVL_fuites{
 	char* id;
+	struct Arbre_fuite* elmt;
+	struct AVL_fuites* fd;
+	struct AVL_fuites* fg;
+	int equilibre;
+}AVL_fuites
 
 typedef struct arbre* pArbre;
