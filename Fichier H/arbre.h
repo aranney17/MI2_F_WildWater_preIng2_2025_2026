@@ -5,14 +5,14 @@
 #include <string.h>
 
 typedef struct chainon{
-	struct arbre* arbre;
+	struct arbre_fuite* arbre;
 	float fuite;
 	struct chainon* suivant;
 } Chainon;
 
-typedef struct arbre{
+typedef struct arbre_fuite{
 	char* id;
 	Chainon* fils;
-} Arbre;
+} Arbre_fuite;
 
 
