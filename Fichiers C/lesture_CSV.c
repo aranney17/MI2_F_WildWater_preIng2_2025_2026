@@ -1,7 +1,7 @@
 #include "lecture_CSV.h"
 
 	
-// procédure qui permet d'allouer dynamiquement l'espace nécessaire pour stocker l'information	
+// procédure qui permet de stocker l'information	
 void stockage_info(char* tmp, char caractere,FILE* fichier){
 
 	// variables locales
@@ -34,7 +34,7 @@ Type_ligne detecter_type(char *col2, char* col3){
     }
 
 	//ligne SOURCE->USINE (captage)
-    if((strstr(col2, "Spring") || strstr(col2, Well) || strstr(col2, Resurgence)) && strstr(col3, "Plant")){
+    if((strstr(col2, "Spring") || strstr(col2, "Well") || strstr(col2, "Resurgence")) && strstr(col3, "Plant")){
 		return SOURCE_USINE;
     }
 
