@@ -141,3 +141,16 @@ pArbre insertionAVL(pArbre a, char* identifiant, Usine* u, int* h){
 	}
 	return a;
 }
+
+AVL_fuites* creerAVL(char* identifiant, Usine u){
+	pArbre noeud = malloc(sizeof(Arbre));
+	if(noeud == NULL){
+		exit(1);
+	}
+	noeud->id = identifiant;
+	noeud->usine = u;
+	noeud->fg = NULL;
+	noeud->fd = NULL;
+	noeud->equilibre = 0;
+	return noeud;
+}
