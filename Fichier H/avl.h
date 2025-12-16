@@ -19,4 +19,7 @@ typedef struct arbre {
 	int equilibre;
 } Arbre;
 
+typedef struct AVL_fuites{
+	char* id;
+
 typedef struct arbre* pArbre;
