@@ -2,7 +2,7 @@
 
 	
 // procédure qui permet de stocker l'information	
-void stockage_info(char* tmp, char caractere,FILE* fichier){
+char* stockage_info(char* tmp, char caractere,FILE* fichier){
 
 	// variables locales
 	int compteur=0;
@@ -22,7 +22,7 @@ void stockage_info(char* tmp, char caractere,FILE* fichier){
     fseek(fichier,-(compteur+1),SEEK_CUR); //curseur replacé devant le premier caractère de l'information
     fgets(tmp,compteur+1,fichier);
 	fseek(fichier,1,SEEK_CUR); //curseur replacé devant le premier caractère de la prochaine information
-	
+	return tmp;
 }
 
 //Fonction qui détecte le type de ligne
@@ -34,17 +34,17 @@ Type_ligne detecter_type(char *col2, char* col3){
     }
 
 	//ligne SOURCE->USINE (captage)
-    if((strstr(col2, "Spring") || strstr(col2, "Well") || strstr(col2, "Resurgence")) && strstr(col3, "Plant")){
+    if((strstr(col2, "Spring") || strstr(col2, "Well") || strstr(col2, "Resurgence") || strstr(col2, "Source") || strstr(col2, "Fountain")) && (strstr(col3, "Plant") || strstr(col3, "Module") || strstr(col3, "Unit"))){
 		return SOURCE_USINE;
     }
 
 	//ligne USINE
-    if((strstr(col2, "Plant") || strstr(col2, "Module")) & col3[0] == '-'){
+    if((strstr(col2, "Plant") || strstr(col2, "Module") || strstr(col2, "Unit")) && col3[0] == '-'){
         return USINE;
     }
 
 	//ligne USINE->STOCKAGE (stockage)
-    if((strstr(col2, "Spring") || strstr(col2, "Module")) && strstr(col3, "Storage")){
+    if((strstr(col2, "Plant") || strstr(col2, "Module") || strstr(col2, "Unit")) && strstr(col3, "Storage")){
         return USINE_STOCKAGE;
     }
 
@@ -68,25 +68,19 @@ Type_ligne detecter_type(char *col2, char* col3){
 	
 }
 
-void stockage_ligne(){
-
-	//Gestion du fichier
-	FILE* fichier=NULL;
-	fichier=fopen("c-wildwater_v0(1).dat","r+");
-	if (fichier==NULL ){
-		printf("Ouverture du fichier impossible\n");
-		exit(1);
-	}
+Ligne stockage_ligne(FILE* fichier){
 	
 	// variables locales
 	Ligne ligne;
 	
 	//Stocke les informations dans les champs correspondants	
-	stockage_info(ligne.col1,';',fichier);
-	stockage_info(ligne.col2,';',fichier);
-	stockage_info(ligne.col3,';',fichier);
-	stockage_info(ligne.volume,';',fichier);
-	stockage_info(ligne.leak,'\n',fichier);
+	ligne.col1=stockage_info(ligne.col1,';',fichier);
+	ligne.col2=stockage_info(ligne.col2,';',fichier);
+	ligne.col3=stockage_info(ligne.col3,';',fichier);
+	ligne.volume=stockage_info(ligne.volume,';',fichier);
+	ligne.leak=stockage_info(ligne.leak,'\n',fichier);
 	ligne.type = detecter_type(ligne.col2, ligne.col3);
+	printf("%s %s %s %s %s %d",ligne.col1,ligne.col2,ligne.col3,ligne.volume,ligne.leak,ligne.type);
+	return ligne;
 	
 }
