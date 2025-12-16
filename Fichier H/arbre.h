@@ -5,7 +5,7 @@
 #include <string.h>
 
 typedef struct chainon{
-	struct arbre_fuite* arbre;
+	struct arbre_fuite* noeud;
 	float fuite;
 	struct chainon* suivant;
 } Chainon;
