@@ -25,6 +25,6 @@ typedef struct AVL_fuites{
 	struct AVL_fuites* fd;
 	struct AVL_fuites* fg;
 	int equilibre;
-}AVL_fuites
+}AVL_fuites;
 
 typedef struct arbre* pArbre;
