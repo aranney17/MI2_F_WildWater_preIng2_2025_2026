@@ -28,3 +28,13 @@ void ajouterFils(Arbre_fuite* parent, Arbre_fuite* enfant, float fuite){
     nv->suivant=parent->fils;
     parent->fils=nv;
 }
+
+int nbFils(Arbre_fuite* noeud){
+    int nb=0;
+    Chainon* p=noeud->fils;
+    while(p!=NULL){
+        nb++;
+        p=p->suivant;
+    }
+    return nb;
+}
