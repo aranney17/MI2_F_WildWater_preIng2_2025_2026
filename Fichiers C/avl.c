@@ -155,7 +155,7 @@ AVL_fuites* creerAVLfuites(char* identifiant, Arbre_fuite* element){
 	return nv;
 }
 
-Arbre_fuite* rechercheAVLfuites(Arbre_fuite* a, char* identifiant){
+AVL_fuites* rechercheAVLfuites(AVL_fuites* a, char* identifiant){
 	if(a == NULL){
 		return NULL;
 	}
