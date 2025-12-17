@@ -4,15 +4,15 @@
 #include <math.h>
 #include <string.h>
 
-typedef struct Chainon{
-	struct arbre_fuite* noeud;
-	float fuite;
-	struct chainon* suivant;
-} Chainon;
+struct Chainon;
 
 typedef struct Arbre_fuite{
-	char* id;
-	Chainon* fils;
+        char* id;
+        struct Chainon* fils;
 } Arbre_fuite;
 
-
+typedef struct Chainon{
+        Arbre_fuite* noeud;
+        float fuite;
+        struct Chainon* suivant;
+} Chainon;
