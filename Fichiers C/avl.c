@@ -234,6 +234,7 @@ AVL_fuites* equilibreAVLfuites(AVL_fuites* a){
 			return doubleRotationDroiteAVLfuites(a);
 		}
 	}
+	return a;
 }
 
 AVL_fuites* insertionAVLfuites(AVL_fuites* a, char* identifiant, Arbre_fuite* element, int* h){
