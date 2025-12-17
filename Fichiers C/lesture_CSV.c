@@ -80,7 +80,7 @@ Ligne stockage_ligne(FILE* fichier){
 	ligne.volume=stockage_info(ligne.volume,';',fichier);
 	ligne.leak=stockage_info(ligne.leak,'\n',fichier);
 	ligne.type = detecter_type(ligne.col2, ligne.col3);
-	printf("%s %s %s %s %s %d",ligne.col1,ligne.col2,ligne.col3,ligne.volume,ligne.leak,ligne.type);
+	//printf("%s %s %s %s %s %d",ligne.col1,ligne.col2,ligne.col3,ligne.volume,ligne.leak,ligne.type);
 	return ligne;
 	
 }
