@@ -4,13 +4,13 @@
 #include <math.h>
 #include <string.h>
 
-typedef struct chainon{
+typedef struct Chainon{
 	struct arbre_fuite* noeud;
 	float fuite;
 	struct chainon* suivant;
 } Chainon;
 
-typedef struct arbre_fuite{
+typedef struct Arbre_fuite{
 	char* id;
 	Chainon* fils;
 } Arbre_fuite;
