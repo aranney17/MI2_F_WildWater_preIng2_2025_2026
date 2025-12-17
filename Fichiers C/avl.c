@@ -147,7 +147,7 @@ AVL_fuites* creerAVLfuites(char* identifiant, Arbre_fuite* element){
 	if(nv == NULL){
 		exit(1);
 	}
-	nv->id = identifiant;
+	nv->id = strdup(identifiant);
 	nv->elmt = element;
 	nv->fg = NULL;
 	nv->fd = NULL;
