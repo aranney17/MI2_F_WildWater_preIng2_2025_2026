@@ -246,7 +246,7 @@ AVL_fuites* insertionAVLfuites(AVL_fuites* a, char* identifiant, Arbre_fuite* el
 		*h = -*h;
 	}
 	else if(strcmp(identifiant, a->id) > 0){
-		a->fd = insertionAVLfuites(a->fd, identifiant, identifiant, h);
+		a->fd = insertionAVLfuites(a->fd, identifiant, element, h);
 	}
 	else{
 		*h = 0;
