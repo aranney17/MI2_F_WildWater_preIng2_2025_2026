@@ -6,28 +6,37 @@ pArbre creerArbre(char* identifiant, Usine u){
 	if(noeud == NULL){
 		exit(1);
 	}
-	noeud->id = identifiant;
-	noeud->usine = u;
+
+	noeud->id = malloc(strlen(identifiant) + 1);
+	if(noeud->id == NULL){
+		exit(1);
+	}
+	strcpy(noeud->id, identifiant);
+
+	noeud->usine = malloc(sizeof(Usine));
+	if(noeud->usine == NULL){
+		exit(1);
+	}
+	*(noeud->usine) = u;
+
 	noeud->fg = NULL;
 	noeud->fd = NULL;
 	noeud->equilibre = 0;
 	return noeud;
 }
 
-int recherche(pArbre a, char* identifiant, int* nb){
-	if(a == NULL){
-		return 0;
-	}
-	if(strcmp(a->id, identifiant) == 0){
-		*nb = 1;
-		return 1;
-	}
-	if(strcmp(a->id, identifiant) > 0){
-		*nb += 1;
-		return recherche(a->fg, identifiant, nb);
-	}
-	*nb+=1;
-	return recherche(a->fd, identifiant, nb);
+pArbre rechercherNoeud(pArbre a, char *id){
+    if(a == NULL){
+	 return NULL;
+    }
+    int cmp = strcmp(id, a->id);
+    if(cmp == 0){
+	return a;
+    }
+    if(cmp < 0){
+	return rechercherNoeud(a->fg, id);
+    }
+    return rechercherNoeud(a->fd, id);
 }
 
 int max(int a, int b){
@@ -45,6 +54,9 @@ int min(int a,int b){
 }
 
 pArbre rotationDroite(pArbre a){
+	if(a == NULL || a->fg == NULL){
+		 return a;
+	}
 	pArbre pivot;
 	int eq_a;
 	int eq_p;
@@ -60,6 +72,9 @@ pArbre rotationDroite(pArbre a){
 }
 
 pArbre rotationGauche(pArbre a){
+	if(a == NULL || a->fd == NULL){
+                 return a;
+        }
 	pArbre pivot;
 	int eq_a;
 	int eq_p;
@@ -91,6 +106,7 @@ pArbre doubleRotationDroite(pArbre a){
 }
 
 
+
 pArbre equilibreAVL(pArbre a){
 	if(a == NULL){
 		exit(1);
@@ -111,6 +127,7 @@ pArbre equilibreAVL(pArbre a){
 			return doubleRotationDroite(a);
 		}
 	}
+	return a;
 }
 
 pArbre insertionAVL(pArbre a, char* identifiant, Usine* u, int* h){
