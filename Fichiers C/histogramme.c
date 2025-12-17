@@ -4,44 +4,38 @@
 //ecrire vol_max vol_captation vol_traite
 
 pArbre parcours(pArbre a){
-	 char buffer[255];
-	 int nb;
-	
-	//Gestion du fichier
-	FILE* fichier=NULL;
-	fichier = fopen("c-wildwater_v0(1).dat","r+");
-	if (fichier == NULL){
-		printf("Ouverture du fichier impossible \n");
-		exit(1);
-	}
-	
-	while (fgets(buffer, sizeof buffer, fichier) != NULL){
-		Ligne ligne;
-		ligne=stockage_ligne(fichier);
-		
-		Usine u;
-		u->id = NULL;
-		u->vol_max = 0;
-		u->vol_capte = 0;
-		u->vol_reel = 0;
-		
-		//convertir les char en double !!
-		
-		if(ligne.type == 1){
-			if(recherche(a, ligne.col2, &nb)){
-				u.id = ligne.col2;
-				u.vol_max = ligne.col4;
-				a = creerArbre(ligne.col2, u);
-			}
-		}
-		else if(ligne.type == 0){
-			if(recherche(a, ligne.col3, &nb)){
-				u.id = ligne.col3;
-				u.vol_capte = ligne.col4;
-				u.vol_reel = u.volume
-				a = creerArbre(ligne.col2, u);
-			}
-		}
-	}
-	fclose(fichier);
+    char buffer[255];
+    FILE* fichier = fopen("fichiertest.txt","r");
+    if(fichier == NULL){
+        exit(1);
+    }
+
+    Ligne ligne;
+
+    while(fgets(buffer, sizeof(buffer), fichier)){
+        ligne = stockage_ligne(buffer);
+
+        if(ligne.type == USINE){
+            Usine u;
+            u.id = malloc(strlen(ligne.col2) + 1);
+            strcpy(u.id, ligne.col2);
+            u.vol_max = ligne.volume;
+            u.vol_capte = 0;
+            u.vol_reel = 0;
+
+            int h = 0;
+            a = insertionAVL(a, ligne.col2, &u, &h);
+        }
+        else if(ligne.type == SOURCE_USINE){
+            pArbre n = rechercherNoeud(a, ligne.col3);
+            if(n != NULL){
+                n->usine->vol_capte += ligne.volume;
+                n->usine->vol_reel += ligne.volume * (1 - ligne.pertes/100);
+            }
+        }
+    }
+
+    fclose(fichier);
+    return a;
 }
+
