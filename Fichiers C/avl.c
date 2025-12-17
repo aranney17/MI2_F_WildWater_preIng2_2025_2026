@@ -239,7 +239,7 @@ AVL_fuites* equilibreAVLfuites(AVL_fuites* a){
 AVL_fuites* insertionAVLfuites(AVL_fuites* a, char* identifiant, Arbre_fuite* element, int* h){
 	if(a == NULL){
 		*h = 1;
-		return creerArbreAVLfuites(identifiant,element);
+		return creerAVLfuites(identifiant,element);
 	}
 	if(strcmp(a->id, identifiant) > 0){
 		a->fg = insertionAVLfuites(a->fg, identifiant, element, h);
