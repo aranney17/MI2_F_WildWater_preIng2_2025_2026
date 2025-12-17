@@ -144,7 +144,7 @@ pArbre insertionAVL(pArbre a, char* identifiant, Usine* u, int* h){
 
 AVL_fuites* creerAVLfuites(char* identifiant, Arbre_fuite* element){
 	AVL_fuites* nv = malloc(sizeof(AVL_fuites));
-	if(noeud == NULL){
+	if(nv == NULL){
 		exit(1);
 	}
 	nv->id = identifiant;
