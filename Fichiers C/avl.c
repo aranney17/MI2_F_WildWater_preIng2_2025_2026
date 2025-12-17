@@ -86,7 +86,7 @@ pArbre doubleRotationDroite(pArbre a){
 	if(a == NULL){
 		exit(1);
 	}
-	a->fd = rotationGauche(a->fg);
+	a->fg = rotationGauche(a->fg);
 	return rotationDroite(a);
 }
 
@@ -210,7 +210,7 @@ AVL_fuites* doubleRotationDroiteAVLfuites(AVL_fuites* a){
 	if(a == NULL){
 		exit(1);
 	}
-	a->fd = rotationGaucheAVLfuites(a->fg);
+	a->fg = rotationGaucheAVLfuites(a->fg);
 	return rotationDroiteAVLfuites(a);
 }
 
