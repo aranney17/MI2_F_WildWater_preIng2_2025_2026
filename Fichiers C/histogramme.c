@@ -5,7 +5,7 @@
 
 pArbre parcours(pArbre a){
     char buffer[255];
-    FILE* fichier = fopen("fichiertest.txt","r");
+    FILE* fichier = fopen("c-wildwater_v0.dat","r");
     if(fichier == NULL){
         exit(1);
     }
