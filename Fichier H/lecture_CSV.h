@@ -11,11 +11,11 @@ typedef enum {
 
 //Structure ligne
 typedef struct {
-	char* col1;
-	char* col2;
-	char* col3;
-	char* volume;
-	char* leak;
+    char col1[256];
+    char col2[256];
+    char col3[256];
+    double volume;
+    double pertes;
 	Type_ligne type;
 } Ligne;
 
