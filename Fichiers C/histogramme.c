@@ -39,3 +39,38 @@ pArbre parcours(pArbre a){
     return a;
 }
 
+void remplir_fichiers(pArbre a, FILE *fmax, FILE *fcap, FILE *freal){
+    if(a == NULL){
+         return;
+    }
+
+    remplir_fichiers(a->fg, fmax, fcap, freal);
+
+    fprintf(fmax,  "%s;%.2f\n", a->id, a->usine->vol_max);
+    fprintf(fcap,  "%s;%.2f\n", a->id, a->usine->vol_capte);
+    fprintf(freal, "%s;%.2f\n", a->id, a->usine->vol_reel);
+
+    remplir_fichiers(a->fd, fmax, fcap, freal);
+}
+
+void generer_fichiers_histogramme(pArbre a){
+    FILE *fmax  = fopen("vol_max.csv", "w");
+    FILE *fcap  = fopen("vol_captation.csv", "w");
+    FILE *freal = fopen("vol_traitement.csv", "w");
+
+    if(fmax == NULL || fcap == NULL || freal == NULL){
+        printf("erreur ouverture fichiers histogramme");
+        exit(1);
+    }
+
+    fprintf(fmax,  "id;volume_max\n");
+    fprintf(fcap,  "id;volume_captation\n");
+    fprintf(freal, "id;volume_traitement\n");
+
+    remplir_fichiers(a, fmax, fcap, freal);
+
+    fclose(fmax);
+    fclose(fcap);
+    fclose(freal);
+}
+
