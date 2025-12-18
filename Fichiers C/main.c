@@ -44,5 +44,9 @@ int main(int argc, char *argv[]){
         printf("Erreur : commande inconnue\n");
         return 1;
     }
+
+	char* id_usine="Unit #NM000000T";
+    AVL_fuites* avl=remplissage_arbre();//mettre juste une fois au debut
+    Historique(id_usine,rendement(avl, id_usine));
 }
 
