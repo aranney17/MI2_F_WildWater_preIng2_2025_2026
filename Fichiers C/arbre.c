@@ -11,7 +11,7 @@ Arbre_fuite* creerArbreFuite(char*identifiant){
     return nv;
 }
 
-Chainon* creerChainon(Arbre_fuite* enfant, float fuite){
+Chainon* creerChainon(Arbre_fuite* enfant, double fuite){
     Chainon* c=malloc(sizeof(Chainon));
     if(c==NULL){
         printf("Allocation échouée");
