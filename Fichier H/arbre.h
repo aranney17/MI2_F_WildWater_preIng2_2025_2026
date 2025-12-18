@@ -8,6 +8,7 @@ struct Chainon;
 
 typedef struct Arbre_fuite{
         char* id;
+        double volume;
         struct Chainon* fils;
 } Arbre_fuite;
 
