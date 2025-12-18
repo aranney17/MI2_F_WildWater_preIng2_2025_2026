@@ -82,8 +82,7 @@ AVL_fuites* remplissage_arbre(){
             
             ajouterFils(parent_arbre,enfant_arbre,ligne.pertes);
         }
-        
-        fclose(fichier);
     } 
+    fclose(fichier);
     return avl_fuites;   
 }
