@@ -1,12 +1,13 @@
 #include "arbre.h"
 
-Arbre_fuite* creerArbreFuite(char*identifiant){
+Arbre_fuite* creerArbreFuite(char*identifiant, double vol){
     Arbre_fuite* nv = malloc(sizeof(Arbre_fuite));
     if(nv==NULL){
         printf("Allocation échouée");
         exit(1);
     }
     nv->id=strdup(identifiant);
+    nv->volume=vol;
     nv->fils = NULL;
     return nv;
 }
