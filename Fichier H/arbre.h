@@ -13,6 +13,6 @@ typedef struct Arbre_fuite{
 
 typedef struct Chainon{
         Arbre_fuite* noeud;
-        float fuite;
+        double fuite;
         struct Chainon* suivant;
 } Chainon;
