@@ -54,9 +54,9 @@ void remplir_fichiers(pArbre a, FILE *fmax, FILE *fcap, FILE *freal){
 }
 
 void generer_fichiers_histogramme(pArbre a){
-    FILE *fmax  = fopen("vol_max.csv", "w");
-    FILE *fcap  = fopen("vol_captation.csv", "w");
-    FILE *freal = fopen("vol_traitement.csv", "w");
+    FILE *fmax  = fopen("vol_max.dat", "w");
+    FILE *fcap  = fopen("vol_captation.dat", "w");
+    FILE *freal = fopen("vol_traitement.dat", "w");
 
     if(fmax == NULL || fcap == NULL || freal == NULL){
         printf("erreur ouverture fichiers histogramme");
