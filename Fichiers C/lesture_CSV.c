@@ -86,11 +86,11 @@ Ligne stockage_ligne(char* buffer){
         tmp = strtok(NULL, ";");
         if(tmp != NULL){
                 strcpy(ligne.col2, tmp);
-		printf("COL2 = [%s]\n", ligne.col2);
+				//printf("COL2 = [%s]\n", ligne.col2);
         }
         else{
                 strcpy(ligne.col2, "");
-		printf("COL2 = [%s]\n", ligne.col2);
+				//printf("COL2 = [%s]\n", ligne.col2);
         }
         tmp = strtok(NULL, ";");
         if(tmp != NULL){
