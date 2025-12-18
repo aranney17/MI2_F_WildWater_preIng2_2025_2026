@@ -24,7 +24,7 @@ int main(int argc, char *argv[]){
 
 		pArbre a = NULL;
 		a = parcours(a);
-		generer_histogramme(fichier_donnees, mode);
+		generer_fichiers_histogramme(fichier_donnees, mode);
 
         return 0;
     }
