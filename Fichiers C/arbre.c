@@ -65,7 +65,7 @@ AVL_fuites* remplissage_arbre(){
             
             parent = rechercheAVLfuites(avl_fuites, ligne.col2);
             if(parent==NULL){
-                parent_arbre=creerArbreFuite(ligne.col2);
+                parent_arbre=creerArbreFuite(ligne.col2,ligne.volume);
                 avl_fuites=insertionAVLfuites(avl_fuites, parent_arbre->id, parent_arbre, &h);
             }
             else{
@@ -74,7 +74,7 @@ AVL_fuites* remplissage_arbre(){
             
             enfant = rechercheAVLfuites(avl_fuites, ligne.col3);
             if(enfant==NULL){
-                enfant_arbre=creerArbreFuite(ligne.col3);
+                enfant_arbre=creerArbreFuite(ligne.col3,ligne.volume);
                 avl_fuites=insertionAVLfuites(avl_fuites, enfant_arbre->id, enfant_arbre, &h);
             }
             else{
