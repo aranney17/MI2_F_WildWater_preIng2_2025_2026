@@ -23,7 +23,7 @@ Chainon* creerChainon(Arbre_fuite* enfant, double fuite){
     return c;
 }
 
-void ajouterFils(Arbre_fuite* parent, Arbre_fuite* enfant, float fuite){
+void ajouterFils(Arbre_fuite* parent, Arbre_fuite* enfant, double fuite){
     Chainon* nv=creerChainon(enfant,fuite);
     nv->suivant=parent->fils;
     parent->fils=nv;
