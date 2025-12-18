@@ -39,27 +39,26 @@ int nbFils(Arbre_fuite* noeud){
     return nb;
 }
 
-void remplissage_arbre(FILE* fichier){        
+AVL_fuites* remplissage_arbre(){
+    
+    char buffer[255];
+    FILE* fichier = fopen("c-wildwater_v0.dat","r");
+    if(fichier == NULL){
+        exit(1);
+    }
+
     //variables locales
-    int caractereActuel = EOF+1;
     Ligne ligne;
-    float fuite;
     AVL_fuites* avl_fuites=NULL;
     int h= 0;
     AVL_fuites* parent;
     AVL_fuites* enfant;
     Arbre_fuite* parent_arbre;
     Arbre_fuite* enfant_arbre;
-        
-    while(caractereActuel!=EOF){
-        ligne=stockage_ligne(fichier);
+
+    while(fgets(buffer, sizeof(buffer), fichier)){
+        ligne = stockage_ligne(buffer);
         if (ligne.type!=SOURCE_USINE && ligne.type!=USINE){
-            if (strcmp(ligne.leak,"-")==0){
-                fuite=0.0;
-            }
-            else{
-                fuite=strtof(ligne.leak,NULL);
-            }
             parent = rechercheAVLfuites(avl_fuites, ligne.col2);
             if(parent==NULL){
                 parent_arbre=creerArbreFuite(ligne.col2);
@@ -76,16 +75,10 @@ void remplissage_arbre(FILE* fichier){
             else{
                 enfant_arbre=enfant->elmt;
             }
-            ajouterFils(parent_arbre,enfant_arbre,fuite);
+            ajouterFils(parent_arbre,enfant_arbre,ligne.pertes);
         }
-        free(ligne.col1);
-        free(ligne.col2);
-        free(ligne.col3);
-        free(ligne.volume);
-        free(ligne.leak);
         
-        caractereActuel=fgetc(fichier);
-        fseek(fichier,-1,SEEK_CUR);
+        fclose(fichier);
     } 
-        
+    return avl_fuites;   
 }
