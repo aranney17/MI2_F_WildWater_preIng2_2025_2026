@@ -34,3 +34,12 @@ double rendement(AVL_fuites* avl, char* id_usine){
     double pertes=calcul_pertes(avl_usine->elmt,avl_usine->elmt->volume);
     return pertes/pow(10,6);
 }
+
+void Historique(char* id_usine,float pertes){
+    FILE* f=fopen("rendements.dat","a");
+    if (f==NULL){
+        exit(1);
+    }
+    fprintf(f,"%s;%lf\n",id_usine,pertes);
+    fclose(f);
+}
