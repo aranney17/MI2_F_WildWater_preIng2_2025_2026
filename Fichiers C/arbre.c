@@ -1,6 +1,5 @@
-#include "fichiers_h/arbre.h"
-#include "fichiers_h/lecture_ligne.h"
-#include "fichiers_h/avl.h"
+#include "arbre.h"
+#include "lecture_ligne.h"
 
 
 Arbre_fuite* creerArbreFuite(char*identifiant, double vol){
@@ -9,8 +8,8 @@ Arbre_fuite* creerArbreFuite(char*identifiant, double vol){
         printf("Allocation échouée");
         exit(1);
     }
-    //nv->id=strdup(identifiant);
-    strcpy(nv->id, identifiant);
+    nv->id=strdup(identifiant);
+    //strcpy(nv->id, identifiant);
     nv->volume=vol;
     nv->fils = NULL;
     return nv;
