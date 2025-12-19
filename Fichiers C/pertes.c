@@ -1,4 +1,5 @@
-#include "fichiers_h/pertes.h"
+
+#include "pertes.h"
 
 
 double calcul_pertes(Arbre_fuite* noeud, double volume){
@@ -32,7 +33,8 @@ double rendement(AVL_fuites* avl, char* id_usine){
     if(avl_usine==NULL){
         return -1.0;
     }
-    double pertes=calcul_pertes(avl_usine->elmt,avl_usine->elmt->volume);
+    double vol=avl_usine->elmt->volume;
+    double pertes=calcul_pertes(avl_usine->elmt,vol);
     return pertes/pow(10,6);
 }
 
