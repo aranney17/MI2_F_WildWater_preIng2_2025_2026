@@ -1,8 +1,9 @@
-#include "fichiers_h/pertes.h"
-#include "fichiers_h/arbre.h"
-#include "fichiers_h/lecture_ligne.h"
-#include "fichiers_h/avl.h"
-#include "fichiers_h/histogramme.h"
+
+#include "pertes.h"
+#include "arbre.h"
+#include "lecture_ligne.h"
+#include "avl.h"
+#include "histogramme.h"
 
 int main(int argc, char *argv[]){
     if(argc < 3){
@@ -27,8 +28,8 @@ int main(int argc, char *argv[]){
 			printf("Erreur : mode histo invalide\n");
             return 1;
         }
-
-		traitement_histogramme(fichier_donnees, mode);
+		printf(" ICIIIIIIII %s \n", fichier_donees);
+		traitement_histogramme(fichier_donees, mode);
 
         return 0;
     }
