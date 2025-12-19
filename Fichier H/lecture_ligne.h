@@ -19,3 +19,6 @@ typedef struct {
 	Type_ligne type;
 } Ligne;
 
+
+Type_ligne detecter_type(char *col2, char* col3);
+Ligne stockage_ligne(char* buffer);
