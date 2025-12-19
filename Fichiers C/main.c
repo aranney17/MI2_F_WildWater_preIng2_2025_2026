@@ -22,9 +22,7 @@ int main(int argc, char *argv[]){
             return 1;
         }
 
-		pArbre a = NULL;
-		a = parcours(a);
-		generer_fichiers_histogramme(fichier_donnees, mode, a);
+		traitement_histogramme(fichier_donnees, mode, a);
 
         return 0;
     }
