@@ -1,3 +1,8 @@
+#ifndef LECTURE_LIGNE_H
+#define LECTURE_LIGNE_H
+
+
+
 // Bibliothèques
 #include <stdio.h>
 #include <stdlib.h>
@@ -19,6 +24,7 @@ typedef struct {
 	Type_ligne type;
 } Ligne;
 
-
-Type_ligne detecter_type(char *col2, char* col3);
+Type_ligne detecter_type(char *col2, char* col3, char* col1);
 Ligne stockage_ligne(char* buffer);
+
+#endif
