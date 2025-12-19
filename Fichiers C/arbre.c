@@ -1,4 +1,7 @@
-#include "arbre.h"
+#include "fichiers_h/arbre.h"
+#include "fichiers_h/lecture_ligne.h"
+#include "fichiers_h/avl.h"
+
 
 Arbre_fuite* creerArbreFuite(char*identifiant, double vol){
     Arbre_fuite* nv = malloc(sizeof(Arbre_fuite));
