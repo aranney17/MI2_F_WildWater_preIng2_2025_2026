@@ -22,7 +22,7 @@ int main(int argc, char *argv[]){
             return 1;
         }
 
-		traitement_histogramme(fichier_donnees, mode, a);
+		traitement_histogramme(fichier_donnees, mode);
 
         return 0;
     }
