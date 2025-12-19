@@ -44,7 +44,7 @@ int nbFils(Arbre_fuite* noeud){
 AVL_fuites* remplissage_arbre(){
     
     char buffer[255];
-    FILE* fichier = fopen("c-wildwater_v0.dat","r");
+    FILE* fichier = fopen("Donnees/c-wildwater_v0.dat","r");
     if(fichier == NULL){
         exit(1);
     }
