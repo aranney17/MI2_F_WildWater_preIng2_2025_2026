@@ -1,4 +1,4 @@
-#include "fichiers_h/lecture_ligne.h"
+#include "lecture_ligne.h"
 
 	
 // procédure qui permet de stocker l'information	
@@ -26,7 +26,7 @@
 }*/
 
 //Fonction qui détecte le type de ligne
-Type_ligne detecter_type(char *col2, char* col3){
+/*Type_ligne detecter_type(char *col2, char* col3){
         if(col2 == NULL || col3 == NULL){
                 return INCONNU;
         }
@@ -49,7 +49,33 @@ Type_ligne detecter_type(char *col2, char* col3){
                 return RACC_USAGER;
         }
         return INCONNU;
+}*/
+
+Type_ligne detecter_type(char *col2, char* col3, char* col1){
+        if(col2 == NULL || col3 == NULL){
+                return INCONNU;
+        }
+        if(strcmp(col1, "-")==0 && !strstr(col2, "-") && !strstr(col3, "-") && !strstr(col2, "Storage")){
+                return SOURCE_USINE;
+        }
+        if(strcmp(col1, "-")==0 && !strstr(col2, "-") && col3[0] == '-'&& !strstr(col2, "Storage")){
+                return USINE;
+        }
+        if((strstr(col2, "Plant") || strstr(col2, "Module") || strstr(col2, "Unit")) && strstr(col3, "Storage")){
+                return USINE_STOCKAGE;
+        }
+        if(strstr(col2, "Storage") && strstr(col3, "Junction")){
+                return STOCKAGE_JONCTION;
+        }
+        if(strstr(col2, "Junction") && strstr(col3, "Service")){
+                return JONCTION_RACC;
+        }
+        if(strstr(col2, "Service") && strstr(col3, "Cust")){
+                return RACC_USAGER;
+        }
+        return INCONNU;
 }
+
 
 /*Ligne stockage_ligne(FILE* fichier){
 	
@@ -114,8 +140,7 @@ Ligne stockage_ligne(char* buffer){
                 ligne.pertes = 0;
 	 }
 
-        ligne.type = detecter_type(ligne.col2, ligne.col3);
+        ligne.type = detecter_type(ligne.col2, ligne.col3, ligne.col1);
 
         return ligne;
 }
-
