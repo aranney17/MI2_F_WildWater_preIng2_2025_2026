@@ -1,7 +1,6 @@
-#include "fichiers_h/histogramme.h"
-
-//lecture_CSV pour chaque ligne on recherche dans l'avl on ajoute le volume a la bonne usine
-//ecrire vol_max vol_captation vol_traite
+#include "histogramme.h"
+#include "lecture_ligne.h"
+#include"avl.h"
 
 pArbre parcours(pArbre a, const char* fichier_donnees){
     char buffer[255];
@@ -16,7 +15,12 @@ pArbre parcours(pArbre a, const char* fichier_donnees){
         ligne = stockage_ligne(buffer);
 
         if(ligne.type == USINE){
-            Usine u;
+        printf("id trouvé %s \n", ligne.col2);
+         pArbre n = rechercherNoeud(a, ligne.col2);
+          if(n != NULL){
+          	 n->usine->vol_max = ligne.volume;
+          }
+            else{Usine u;
             u.id = malloc(strlen(ligne.col2) + 1);
             strcpy(u.id, ligne.col2);
             u.vol_max = ligne.volume;
@@ -24,13 +28,25 @@ pArbre parcours(pArbre a, const char* fichier_donnees){
             u.vol_reel = 0;
 
             int h = 0;
-            a = insertionAVL(a, ligne.col2, &u, &h);
+            a = insertionAVL(a, ligne.col2, &u, &h);}
         }
         else if(ligne.type == SOURCE_USINE){
+        	  printf("id trouvé %s \n", ligne.col3);
             pArbre n = rechercherNoeud(a, ligne.col3);
             if(n != NULL){
                 n->usine->vol_capte += ligne.volume;
                 n->usine->vol_reel += ligne.volume * (1 - ligne.pertes/100);
+            }
+            else{
+            Usine u;
+            u.id = malloc(strlen(ligne.col3) + 1);
+            strcpy(u.id, ligne.col3);
+            u.vol_max = 0;
+            u.vol_capte = ligne.volume;
+            u.vol_reel = ligne.volume * (1 - ligne.pertes/100);
+
+            int h = 0;
+            a = insertionAVL(a, ligne.col3, &u, &h);
             }
         }
     }
@@ -39,12 +55,12 @@ pArbre parcours(pArbre a, const char* fichier_donnees){
     return a;
 }
 
-void remplir_infixe(pArbre a, const char* mode){
+void remplir_infixe(pArbre a, const char* mode, FILE *fmax){
     if(a == NULL){
         return;
     }
-
-    remplir_infixe(a->fg, mode);
+	
+    remplir_infixe(a->fg, mode,fmax);
     
     if(strcmp(mode, "max") == 0){
         fprintf(fmax,  "%s;%lf\n", a->id, a->usine->vol_max);
@@ -55,7 +71,7 @@ void remplir_infixe(pArbre a, const char* mode){
         fprintf(fmax,  "%s;%lf\n", a->id, a->usine->vol_reel);
     }
 
-    remplir_infixe(a->fd, mode);
+    remplir_infixe(a->fd, mode,fmax);
     
 }
 
@@ -82,7 +98,7 @@ void generer_fichier_max(pArbre a, const char* mode){
 
     fprintf(fmax,  "identifiant;volume max (k.m3.year-1)\n");
 
-    remplir_infixe(a, mode);
+    remplir_infixe(a, mode,fmax);
 
     fclose(fmax);
 }
@@ -96,12 +112,12 @@ void generer_fichier_src(pArbre a, const char* mode){
 
     fprintf(fcap,  "identifiant;volume capté (k.m3.year-1)\n");
 
-    remplir_infixe(a, mode);
+    remplir_infixe(a, mode, fcap);
 
     fclose(fcap);
 }
 
-void generer_fichier_max(pArbre a, const char* mode){
+void generer_fichier_real(pArbre a, const char* mode){
     FILE *freal = fopen("vol_traitement.dat", "w");
     if(freal == NULL){
         printf("erreur ouverture fichier histogramme");
@@ -110,7 +126,7 @@ void generer_fichier_max(pArbre a, const char* mode){
 
     fprintf(freal, "identifiant;volume traité (k.m3.year-1)\n");
 
-    remplir_infixe(a, mode);
+    remplir_infixe(a, mode, freal);
 
     fclose(freal);
 }
@@ -118,13 +134,13 @@ void generer_fichier_max(pArbre a, const char* mode){
 void traitement_histogramme(const char* fichier_donnees, const char* mode){
     pArbre a = NULL;
     a = parcours(a, fichier_donnees);
-    if(strcmp(mode, max) == 0){
+    if(strcmp(mode, "max") == 0){
          generer_fichier_max(a, mode);
     }
-    if(strcmp(mode, max) == 0){
-         generer_fichier_max(a, mode);
+    if(strcmp(mode, "src") == 0){
+         generer_fichier_src(a, mode);
     }
-    if(strcmp(mode, max) == 0){
-         generer_fichier_max(a, mode);
+    if(strcmp(mode, "real") == 0){
+         generer_fichier_real(a, mode);
     }
 }
