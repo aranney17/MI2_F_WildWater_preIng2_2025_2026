@@ -1,4 +1,5 @@
-#include "pertes.h"
+#include "fichiers_h/pertes.h"
+
 
 double calcul_pertes(Arbre_fuite* noeud, double volume){
     
