@@ -28,3 +28,23 @@ typedef struct AVL_fuites{
 }AVL_fuites;
 
 typedef struct arbre* pArbre;
+
+
+pArbre creerArbre(char* identifiant, Usine u);
+pArbre rechercherNoeud(pArbre a, char *id);
+int max(int a, int b);
+int min(int a,int b);
+pArbre rotationDroite(pArbre a);
+pArbre rotationGauche(pArbre a);
+pArbre doubleRotationGauche(pArbre a);
+pArbre doubleRotationDroite(pArbre a);
+pArbre equilibreAVL(pArbre a);
+pArbre insertionAVL(pArbre a, char* identifiant, Usine* u, int* h);
+AVL_fuites* creerAVLfuites(char* identifiant, Arbre_fuite* element);
+AVL_fuites* rechercheAVLfuites(AVL_fuites* a, char* identifiant);
+AVL_fuites* rotationDroiteAVLfuites(AVL_fuites* a);
+AVL_fuites* rotationGaucheAVLfuites(AVL_fuites* a);
+AVL_fuites* doubleRotationGaucheAVLfuites(AVL_fuites* a);
+AVL_fuites* doubleRotationDroiteAVLfuites(AVL_fuites* a);
+AVL_fuites* equilibreAVLfuites(AVL_fuites* a);
+AVL_fuites* insertionAVLfuites(AVL_fuites* a, char* identifiant, Arbre_fuite* element, int* h);
