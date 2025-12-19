@@ -32,7 +32,8 @@ EXEC="./wildwater"
 
 if [ ! -x "$EXEC" ]; then
     echo "Compilation du programme C..."
-    gcc -Wall -Wextra -o wildwater main.c
+    #gcc -Wall -Wextra -o wildwater main.c
+    make
 fi
 
 # Traitement des commandes
@@ -94,6 +95,5 @@ END=$(date +%s)
 DURATION=$((END - START))
 
 echo "Durée totale du script : ${DURATION} secondes"
-
 
 
