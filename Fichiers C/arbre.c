@@ -6,7 +6,8 @@ Arbre_fuite* creerArbreFuite(char*identifiant, double vol){
         printf("Allocation échouée");
         exit(1);
     }
-    nv->id=strdup(identifiant);
+    //nv->id=strdup(identifiant);
+    strcpy(nv->id, identifiant);
     nv->volume=vol;
     nv->fils = NULL;
     return nv;
