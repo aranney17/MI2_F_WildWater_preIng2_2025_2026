@@ -17,7 +17,7 @@ double calcul_pertes(Arbre_fuite* noeud, double volume){
         volume_par_fils=volume/nbFils(noeud);
         perte_troncon=volume_par_fils*p->fuite;
         pertes_totales+=perte_troncon;
-        volume_fils=volume_par_fils*(1-p->fuite);
+        volume_fils=volume_par_fils*(100-p->fuite);
         pertes_totales+=calcul_pertes(p->noeud, volume_fils);
         p=p->suivant;
     }
