@@ -33,7 +33,7 @@ Type_ligne detecter_type(char *col2, char* col3){
         if((strstr(col2, "Spring") || strstr(col2, "Well") || strstr(col2, "Resurgence")) && (strstr(col3, "Plant") || strstr(col3, "Module") || strstr(col3, "Unit"))){
                 return SOURCE_USINE;
         }
-        if((strstr(col2, "Plant") || strstr(col2, "Module")) && col3[0] == '-'){
+        if((strstr(col2, "Plant") || strstr(col2, "Module") || strstr(col2, "Unit")) && col3[0] == '-'){
                 return USINE;
         }
         if((strstr(col2, "Plant") || strstr(col2, "Module") || strstr(col2, "Unit")) && strstr(col3, "Storage")){
