@@ -1,3 +1,9 @@
+#include "fichiers_h/pertes.h"
+#include "fichiers_h/arbre.h"
+#include "fichiers_h/lecture_ligne.h"
+#include "fichiers_h/avl.h"
+#include "fichiers_h/histogramme.h"
+
 int main(int argc, char *argv[]){
     if(argc < 3){
         printf("Erreur : arguments insuffisants\n");
