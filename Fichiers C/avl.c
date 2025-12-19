@@ -1,4 +1,6 @@
-#include "fichiers_h/avl.h"
+#include "arbre.h"
+#include "lecture_ligne.h"
+#include "avl.h"
 
 
 pArbre creerArbre(char* identifiant, Usine u){
@@ -282,3 +284,4 @@ AVL_fuites* insertionAVLfuites(AVL_fuites* a, char* identifiant, Arbre_fuite* el
 	}
 	return a;
 }
+
