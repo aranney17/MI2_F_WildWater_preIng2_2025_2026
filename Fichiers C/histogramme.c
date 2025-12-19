@@ -53,7 +53,7 @@ void remplir_fichiers(pArbre a, FILE *fmax, FILE *fcap, FILE *freal){
     remplir_fichiers(a->fd, fmax, fcap, freal);
 }
 
-void generer_fichiers_histogramme(pArbre a){
+void generer_fichiers_histogramme(char* fichier, char* mode, pArbre a){
     FILE *fmax  = fopen("vol_max.dat", "w");
     FILE *fcap  = fopen("vol_captation.dat", "w");
     FILE *freal = fopen("vol_traitement.dat", "w");
