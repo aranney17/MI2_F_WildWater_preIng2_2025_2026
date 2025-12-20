@@ -35,11 +35,13 @@ double rendement(AVL_fuites* avl, char* id_usine){
     
     AVL_fuites* avl_usine=rechercheAVLfuites(avl, id_usine);
     if(avl_usine==NULL){
+        printf("usine non trouvée\n");
         return -1.0;
     }
     double vol=avl_usine->elmt->volume;
-    double pertes=calcul_pertes(avl_usine->elmt,vol);
-    return pertes/pow(10,6);
+    double pertes=calcul_pertes(avl_usine->elmt,vol)/pow(10,3);
+    printf("Le volume d'eau potable perdus par %s est de %lf M.m3.\n",id_usine,pertes);
+    return pertes;
 }
 
 void Historique(char* id_usine,float pertes){
