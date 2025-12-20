@@ -41,7 +41,7 @@ int main(int argc, char *argv[]){
 
         char *usine_id = argv[3];
 
-        AVL_fuites* avl=remplissage_arbre();
+        AVL_fuites* avl=remplissage_arbre(fichier_donees);
     	Historique(usine_id,rendement(avl, usine_id)); 
 
         return 0;
