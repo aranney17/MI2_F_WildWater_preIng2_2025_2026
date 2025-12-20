@@ -28,6 +28,10 @@ double calcul_pertes(Arbre_fuite* noeud, double volume){
 }
 
 double rendement(AVL_fuites* avl, char* id_usine){
+
+    if(strstr(id_usine, "Unit")==NULL && strstr(id_usine, "Plant")==NULL && strstr(id_usine, "Module")==NULL){
+        return -1.0;
+    }
     
     AVL_fuites* avl_usine=rechercheAVLfuites(avl, id_usine);
     if(avl_usine==NULL){
