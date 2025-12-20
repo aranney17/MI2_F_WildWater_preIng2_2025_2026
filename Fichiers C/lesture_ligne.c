@@ -51,17 +51,17 @@
         return INCONNU;
 }*/
 
-Type_ligne detecter_type(char *col2, char* col3, char* col1){
+Type_ligne detecter_type(char* col1, char *col2, char* col3){
         if(col2 == NULL || col3 == NULL){
                 return INCONNU;
         }
-        if(strcmp(col1, "-")==0 && !strstr(col2, "-") && !strstr(col3, "-") && !strstr(col2, "Storage")){
+        if(col1[0] == '-' && col2[0] != '-' && col3[0] != '-' ){
                 return SOURCE_USINE;
         }
-        if(strcmp(col1, "-")==0 && !strstr(col2, "-") && col3[0] == '-'&& !strstr(col2, "Storage")){
+        if(col1[0] == '-' && col2[0] != '-' && col3[0] == '-'){
                 return USINE;
         }
-        if((strstr(col2, "Plant") || strstr(col2, "Module") || strstr(col2, "Unit")) && strstr(col3, "Storage")){
+        if(col1[0] == '-' && col2[0] != '-' && strstr(col3, "Storage")){
                 return USINE_STOCKAGE;
         }
         if(strstr(col2, "Storage") && strstr(col3, "Junction")){
@@ -140,7 +140,7 @@ Ligne stockage_ligne(char* buffer){
                 ligne.pertes = 0;
 	 }
 
-        ligne.type = detecter_type(ligne.col2, ligne.col3, ligne.col1);
+        ligne.type = detecter_type(ligne.col1,ligne.col2, ligne.col3);
 
         return ligne;
 }
