@@ -63,8 +63,6 @@ AVL_fuites* remplissage_arbre(const char* fichier_donnees){
     while(fgets(buffer, sizeof(buffer), fichier)){
         
         ligne = stockage_ligne(buffer);
-        
-        if (ligne.type!=SOURCE_USINE && ligne.type!=USINE){
             
             parent = rechercheAVLfuites(avl_fuites, ligne.col2);
             if(parent==NULL){
@@ -85,7 +83,7 @@ AVL_fuites* remplissage_arbre(const char* fichier_donnees){
             }
             
             ajouterFils(parent_arbre,enfant_arbre,ligne.pertes);
-        }
+        
     } 
     fclose(fichier);
     return avl_fuites;   
