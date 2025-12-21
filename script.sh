@@ -85,17 +85,15 @@ case "$COMMAND" in
     	awk -F';' 'NR==FNR {ids[$0]; next} ($1 in ids)' "$ids" "$src" > "$out"
 	}
 
-	filtrer_par_ids ids_petites.txt vol_max.dat        petites_vol_max.dat
-	filtrer_par_ids ids_petites.txt vol_captation.dat petites_vol_captation.dat
-	filtrer_par_ids ids_petites.txt vol_traitement.dat petites_vol_traitement.dat
+	SRC_FILE="${DAT}.dat"
 
-	filtrer_par_ids ids_grandes.txt vol_max.dat        grandes_vol_max.dat
-	filtrer_par_ids ids_grandes.txt vol_captation.dat grandes_vol_captation.dat
-	filtrer_par_ids ids_grandes.txt vol_traitement.dat grandes_vol_traitement.dat
+	filtrer_par_ids ids_petites.txt "$SRC_FILE" "petites_${DAT}.dat"
+	filtrer_par_ids ids_grandes.txt "$SRC_FILE" "grandes_${DAT}.dat"
+
 
 	# Gnuplot
-	gnuplot -e "infile='${DAT}_petites.dat'; outfile='${DAT}_petites.png'" histo.gp
-	gnuplot -e "infile='${DAT}_grandes.dat'; outfile='${DAT}_grandes.png'" histo.gp
+	gnuplot -e "infile='petites_${DAT}.dat'; outfile='petites_${DAT}.png'" histo.gp
+	gnuplot -e "infile='grandes_${DAT}.dat'; outfile='grandes_${DAT}.png'" histo.gp
 
 	echo "Histogrammes générés pour $1"
 	;;
