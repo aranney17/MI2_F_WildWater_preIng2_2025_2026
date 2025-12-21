@@ -1,7 +1,7 @@
 #include "arbre.h"
 #include "lecture_ligne.h"
 
-
+//Fonction qui crée un noeud de l'arbre fuite
 Arbre_fuite* creerArbreFuite(char*identifiant, double vol){
     Arbre_fuite* nv = malloc(sizeof(Arbre_fuite));
     if(nv==NULL){
@@ -9,12 +9,12 @@ Arbre_fuite* creerArbreFuite(char*identifiant, double vol){
         exit(1);
     }
     nv->id=strdup(identifiant);
-    //strcpy(nv->id, identifiant);
     nv->volume=vol;
     nv->fils = NULL;
     return nv;
 }
 
+//Fonction qui un chaînon dans la liste chaînée 
 Chainon* creerChainon(Arbre_fuite* enfant, double fuite){
     Chainon* c=malloc(sizeof(Chainon));
     if(c==NULL){
