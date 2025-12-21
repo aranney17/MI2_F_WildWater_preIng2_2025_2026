@@ -23,10 +23,10 @@
     fgets(tmp,compteur+1,fichier);
 	fseek(fichier,1,SEEK_CUR); //curseur replacé devant le premier caractère de la prochaine information
 	return tmp;
-}*/
+}
 
 //Fonction qui détecte le type de ligne
-/*Type_ligne detecter_type(char *col2, char* col3){
+Type_ligne detecter_type(char *col2, char* col3){
         if(col2 == NULL || col3 == NULL){
                 return INCONNU;
         }
@@ -49,9 +49,9 @@
                 return RACC_USAGER;
         }
         return INCONNU;
-}*/
+}
 
-/*Type_ligne detecter_type(char* col1, char *col2, char* col3){
+Type_ligne detecter_type(char* col1, char *col2, char* col3){
         if(col2 == NULL || col3 == NULL){
                 return INCONNU;
         }
@@ -75,9 +75,9 @@
         }
         return INCONNU;
 }
-*/
 
-/*Ligne stockage_ligne(FILE* fichier){
+
+Ligne stockage_ligne(FILE* fichier){
 	
 	// variables locales
 	Ligne ligne;
@@ -92,9 +92,9 @@
 	//printf("%s %s %s %s %s %d",ligne.col1,ligne.col2,ligne.col3,ligne.volume,ligne.leak,ligne.type);
 	return ligne;
 	
-}*/
+}
 
-/*Type_ligne detecter_type(char* col1, char* col2, char* col3){
+Type_ligne detecter_type(char* col1, char* col2, char* col3){
     if(!col1 || !col2 || !col3){
         return INCONNU;
     }
@@ -109,7 +109,7 @@
 
     return INCONNU;
 }
-*/
+
 
 int est_tiret(const char* s){
     if(!s) return 0;
@@ -128,18 +128,18 @@ Type_ligne detecter_type(char* col1, char* col2, char* col3){
     int c2_tiret = est_tiret(col2);
     int c3_tiret = est_tiret(col3);
 
-    /* Déclaration d’une usine */
+    // Déclaration d’une usine 
     if(c1_tiret && !c2_tiret && c3_tiret){
         return USINE;
     }
 
-    /* Source → Usine */
+    // Source → Usine 
     if(c1_tiret && !c2_tiret && !c3_tiret){
         return SOURCE_USINE;
     }
 
     return INCONNU;
-}
+}*/
 
 void nettoyer(char *s){
     if(!s) return;
@@ -152,6 +152,35 @@ void nettoyer(char *s){
         p++;
     }
 }
+
+Type_ligne detecter_type(char* col1, char* col2, char* col3){
+    if(!col1 || !col2 || !col3){
+        return INCONNU;
+    }
+
+    /* SOURCE -> USINE */
+    if(col1[0] == '-' && col2[0] != '-' && col3[0] != '-'){
+        return SOURCE_USINE;
+    }
+
+    /* USINE seule */
+    if(col1[0] == '-' && col2[0] != '-' && col3[0] == '-'){
+        return USINE;
+    }
+
+    /* USINE -> STOCKAGE */
+    if(col1[0] == '-' && col2[0] != '-' && col3[0] != '-' ){
+        return USINE_STOCKAGE;
+    }
+
+    /* STOCKAGE -> JONCTION */
+    if(col1[0] != '-' && col2[0] != '-' && col3[0] != '-'){
+        return STOCKAGE_JONCTION;
+    }
+
+    return INCONNU;
+}
+
 
 
 Ligne stockage_ligne(char* buffer){
