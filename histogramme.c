@@ -63,7 +63,7 @@ void remplir_infixe(pArbre a, const char* mode, FILE *fmax){
         return;
     }
 
-    remplir_infixe(a->fg, mode,fmax);
+    remplir_infixe(a->fd, mode,fmax);
 
     if(strcmp(mode, "max") == 0){
         fprintf(fmax,  "%s;%lf\n", a->id, a->usine->vol_max);
@@ -74,7 +74,7 @@ void remplir_infixe(pArbre a, const char* mode, FILE *fmax){
         fprintf(fmax,  "%s;%lf\n", a->id, a->usine->vol_reel);
     }
 
-    remplir_infixe(a->fd, mode,fmax);
+    remplir_infixe(a->fg, mode,fmax);
     
 }
 
