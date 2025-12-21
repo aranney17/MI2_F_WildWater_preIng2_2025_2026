@@ -1,7 +1,7 @@
 
 #include "pertes.h"
 
-
+//fonction qui calcule la perte totale aval d'un noeud
 double calcul_pertes(Arbre_fuite* noeud, double volume){
     //Si usager
     if(noeud->fils==NULL){
@@ -33,8 +33,9 @@ double calcul_pertes(Arbre_fuite* noeud, double volume){
     return pertes_totales;
 }
 
+//fonction qui calcule le rendement depuis l'usine
 double rendement(AVL_fuites* avl, char* id_usine){
-    //Si ce n'est pas un usine
+    //Si ce n'est pas une usine
     if(strstr(id_usine, "Unit")==NULL && strstr(id_usine, "Plant")==NULL && strstr(id_usine, "Module")==NULL && strstr(id_usine, "Facility")==NULL){
         return -1.0;
     }
@@ -50,7 +51,7 @@ double rendement(AVL_fuites* avl, char* id_usine){
 
     //sinon
     double vol=avl_usine->elmt->volume;
-    //calcul des pertes
+    //calcul des pertes et conversion en millions de m3
     double pertes=calcul_pertes(avl_usine->elmt,vol)/pow(10,3);
     printf("Le volume d'eau potable perdus par %s est de %lf M.m3.\n",id_usine,pertes);
     return pertes;
@@ -63,7 +64,8 @@ void Historique(char* id_usine,float pertes){
     if (f==NULL){
         exit(1);
     }
-    
+
+    //Ecrit dans le fichier
     fprintf(f,"%s;%lf\n",id_usine,pertes);
     fclose(f);
 }
