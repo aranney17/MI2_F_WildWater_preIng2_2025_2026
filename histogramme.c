@@ -78,20 +78,6 @@ void remplir_infixe(pArbre a, const char* mode, FILE *fmax){
     
 }
 
-/*void remplir_fichier(pArbre a, FILE *fmax, FILE *fcap, FILE *freal){
-    if(a == NULL){
-         return;
-    }
-
-    remplir_fichiers(a->fg, fmax, fcap, freal);
-
-    fprintf(fmax,  "%s;%lf\n", a->id, a->usine->vol_max);
-    fprintf(fcap,  "%s;%lf\n", a->id, a->usine->vol_capte);
-    fprintf(freal, "%s;%lf\n", a->id, a->usine->vol_reel);
-
-    remplir_fichiers(a->fd, fmax, fcap, freal);
-}*/
-
 void generer_fichier_max(pArbre a, const char* mode){
     FILE *fmax  = fopen("vol_max.dat", "w+");
     if(fmax == NULL){
