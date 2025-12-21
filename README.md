@@ -1,7 +1,7 @@
 Projet WildWater:
 
 Le projet WildWater a pour objectif d’analyser et de simuler le fonctionnement d’un réseau de distribution d’eau potable.  À partir d’un fichier de données décrivant les sources, usines, stockages, jonctions et usagers, le programme permet : de calculer les volumes d’eau captés, traités et maximaux par usine, d’analyser les pertes d’eau dans le réseau, de générer des fichiers exploitables pour la visualisation sous forme d’histogrammes, de conserver un historique des pertes par usine.
-Les données sont lues depuis un fichier texte  c-wildwater_v0.dat et traitées dynamiquement à l’aide de structures de données avancées (arbres AVL et arbres de fuites).
+Les données sont lues depuis un fichier texte et traitées dynamiquement à l’aide de structures de données avancées (arbres AVL et arbres de fuites).
 
 FONCTIONNALITÉS
 
@@ -15,8 +15,6 @@ FONCTIONNALITÉS
 ORGANISATION DU PROJET
 
   Voici les fichiers principaux :
-  
-  Un dossier 'Donnees' contient le fichier de données c-wildwater_v0.dat du réseau de distribution d’eau potable.
 
   Un dossier 'tests' contient des exemples d'exécution (images et fichiers) de notre application.
   
@@ -50,9 +48,11 @@ ORGANISATION DU PROJET
 
 LANCER LE PROGRAMME
 
-1. Compiler le projet avec : make
+1. Placer le fichier de données du réseau de distribution d’eau potable à la racine du projet
+   
+2. Compiler le projet avec : make
 
-2. Lancer le programme avec l'executable :
+3. Lancer le programme avec l'executable :
    
   Pour la génération d’histogrammes:
   bash script.sh <fichier_donnees> histo {max|src|real}
