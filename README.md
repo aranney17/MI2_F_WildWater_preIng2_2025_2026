@@ -1,10 +1,6 @@
 Projet WildWater:
 
-Le projet WildWater a pour objectif d’analyser et de simuler le fonctionnement d’un réseau de distribution d’eau potable. À partir d’un fichier de données décrivant les sources, usines, stockages, jonctions et usagers, le programme permet :
- -de calculer les volumes d’eau captés, traités et maximaux par usine,
- -d’analyser les pertes d’eau dans le réseau,
-de générer des fichiers exploitables pour la visualisation sous forme d’histogrammes,
- -de conserver un historique des pertes par usine.
+Le projet WildWater a pour objectif d’analyser et de simuler le fonctionnement d’un réseau de distribution d’eau potable.  À partir d’un fichier de données décrivant les sources, usines, stockages, jonctions et usagers, le programme permet : de calculer les volumes d’eau captés, traités et maximaux par usine, d’analyser les pertes d’eau dans le réseau, de générer des fichiers exploitables pour la visualisation sous forme d’histogrammes, de conserver un historique des pertes par usine.
 Les données sont lues depuis un fichier texte  c-wildwater_v0.dat et traitées dynamiquement à l’aide de structures de données avancées (arbres AVL et arbres de fuites).
 
 FONCTIONNALITÉS
