@@ -7,18 +7,10 @@ FONCTIONNALITÉS
 
   Le programme se lance en ligne de commande et propose deux grandes fonctionnalités :
   
-  1. Génération d’histogrammes (histo)
-     Permet de produire des fichiers de données pour représenter graphiquement :
-     Volume maximal traité par usine (max)
-     Volume capté par les sources (src)
-     Volume réellement traité après pertes (real)
+  1. Génération d’histogrammes (histo) : permet de produire des fichiers de données pour représenter graphiquement le volume maximal traité par usine (max), le volume capté       par les sources (src) et le volume réellement traité après pertes (real).
      Les résultats sont exportés dans des fichiers .dat et peuvent être visualisés à l’aide de gnuplot.
   
-  2. Analyse des pertes (leaks)
-  Calcule les pertes d’eau à partir d’une usine donnée
-  Parcourt le réseau en tenant compte des fuites sur chaque tronçon
-  Affiche le volume total perdu
-  Sauvegarde le résultat dans un fichier d’historique (rendements.dat)
+  2. Analyse des pertes (leaks) : calcule les pertes d’eau à partir d’une usine donnée, parcourt le réseau en tenant compte des fuites sur chaque tronçon, affiche le volume       total perdu et sauvegarde ce résultat dans un fichier d’historique (rendements.dat).
 
 ORGANISATION DU PROJET
 
