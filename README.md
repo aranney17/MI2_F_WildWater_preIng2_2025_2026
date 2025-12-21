@@ -16,9 +16,9 @@ ORGANISATION DU PROJET
 
   Voici les fichiers principaux :
   
-  Un dossier Données contient le fichier de données c-wildwater_v0.dat du réseau de distribution d’eau potable.
+  Un dossier 'Données' contient le fichier de données c-wildwater_v0.dat du réseau de distribution d’eau potable.
 
-  Un dossier tests contient des exemples d'exécution (images et fichiers) de notre application.
+  Un dossier 'tests' contient des exemples d'exécution (images et fichiers) de notre application.
   
   arbre.h : contient les prototypes des fonctions et des procédures liés à l’arbre de fuites (création et de manipulation des nœuds).
   
