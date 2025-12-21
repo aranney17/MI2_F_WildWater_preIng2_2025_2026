@@ -37,7 +37,7 @@ pArbre parcours(pArbre a, const char* fichier_donnees){
                 n->usine->vol_capte += ligne.volume;
                 n->usine->vol_reel += ligne.volume * (1 - ligne.pertes/100);
             }
-            else{
+            /*else{
             Usine u;
             u.id = malloc(strlen(ligne.col3) + 1);
             strcpy(u.id, ligne.col3);
@@ -47,7 +47,7 @@ pArbre parcours(pArbre a, const char* fichier_donnees){
 
             int h = 0;
             a = insertionAVL(a, ligne.col3, &u, &h);
-            }
+            }*/
         }
     }
 
@@ -90,7 +90,7 @@ void remplir_infixe(pArbre a, const char* mode, FILE *fmax){
 }*/
 
 void generer_fichier_max(pArbre a, const char* mode){
-    FILE *fmax  = fopen("vol_max.dat", "w");
+    FILE *fmax  = fopen("vol_max.dat", "w+");
     if(fmax == NULL){
         printf("erreur ouverture fichier histogramme");
         exit(1);
@@ -104,7 +104,7 @@ void generer_fichier_max(pArbre a, const char* mode){
 }
 
 void generer_fichier_src(pArbre a, const char* mode){
-    FILE *fcap  = fopen("vol_captation.dat", "w");
+    FILE *fcap  = fopen("vol_captation.dat", "w+");
     if(fcap == NULL ){
         printf("erreur ouverture fichier histogramme");
         exit(1);
@@ -118,7 +118,7 @@ void generer_fichier_src(pArbre a, const char* mode){
 }
 
 void generer_fichier_real(pArbre a, const char* mode){
-    FILE *freal = fopen("vol_traitement.dat", "w");
+    FILE *freal = fopen("vol_traitement.dat", "w+");
     if(freal == NULL){
         printf("erreur ouverture fichier histogramme");
         exit(1);
