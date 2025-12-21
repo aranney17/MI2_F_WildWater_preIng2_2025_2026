@@ -8,11 +8,11 @@ FONCTIONNALITÉS
   Le programme se lance en ligne de commande et propose deux grandes fonctionnalités :
   
   1. Génération d’histogrammes (histo)
-  Permet de produire des fichiers de données pour représenter graphiquement :
-  Volume maximal traité par usine (max)
-  Volume capté par les sources (src)
-  Volume réellement traité après pertes (real)
-  Les résultats sont exportés dans des fichiers .dat et peuvent être visualisés à l’aide de gnuplot.
+     Permet de produire des fichiers de données pour représenter graphiquement :
+     Volume maximal traité par usine (max)
+     Volume capté par les sources (src)
+     Volume réellement traité après pertes (real)
+     Les résultats sont exportés dans des fichiers .dat et peuvent être visualisés à l’aide de gnuplot.
   
   2. Analyse des pertes (leaks)
   Calcule les pertes d’eau à partir d’une usine donnée
