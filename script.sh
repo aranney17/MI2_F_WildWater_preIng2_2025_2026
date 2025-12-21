@@ -72,9 +72,10 @@ case "$COMMAND" in
         fi
 
 	# Tri par volume max
-	sort -t';' -k2,2n "vol_max.dat" > vol_max_trie.dat
+	tail -n +2 vol_max.dat | sort -t';' -k2,2n > vol_max_trie.dat
 
-	head -n 51 vol_max_trie.dat | tail -n 50 | cut -d';' -f1 > ids_petites.txt
+	# Sélection des IDs
+	head -n 50 vol_max_trie.dat | cut -d';' -f1 > ids_petites.txt
 	tail -n 10 vol_max_trie.dat | cut -d';' -f1 > ids_grandes.txt
 
 	filtrer_par_ids() {
@@ -124,6 +125,4 @@ END=$(date +%s)
 DURATION=$((END - START))
 
 echo "Durée totale du script : ${DURATION} secondes"
-
-
 
