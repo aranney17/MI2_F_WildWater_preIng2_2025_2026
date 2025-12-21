@@ -16,7 +16,7 @@ ORGANISATION DU PROJET
 
   Voici les fichiers principaux :
   
-  Un dossier 'Données' contient le fichier de données c-wildwater_v0.dat du réseau de distribution d’eau potable.
+  Un dossier 'Donnees' contient le fichier de données c-wildwater_v0.dat du réseau de distribution d’eau potable.
 
   Un dossier 'tests' contient des exemples d'exécution (images et fichiers) de notre application.
   
