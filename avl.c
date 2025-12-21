@@ -2,6 +2,7 @@
 #include "lecture_ligne.h"
 #include "avl.h"
 
+/*-------Fonctions utiles à la gestion des avl----------*/
 
 pArbre creerArbre(char* identifiant, Usine u){
 	pArbre noeud = malloc(sizeof(Arbre));
