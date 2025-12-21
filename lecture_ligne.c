@@ -237,5 +237,3 @@ Ligne stockage_ligne(char* buffer){
 
         return ligne;
 }
-
-
