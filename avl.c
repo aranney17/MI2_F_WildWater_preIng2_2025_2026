@@ -4,6 +4,7 @@
 
 /*-------Fonctions utiles à la gestion des avl----------*/
 
+//Création noeud
 pArbre creerArbre(char* identifiant, Usine u){
 	pArbre noeud = malloc(sizeof(Arbre));
 	if(noeud == NULL){
@@ -28,20 +29,22 @@ pArbre creerArbre(char* identifiant, Usine u){
 	return noeud;
 }
 
+//Recherche noeud dans avl
 pArbre rechercherNoeud(pArbre a, char *id){
     if(a == NULL){
 	 return NULL;
     }
     int cmp = strcmp(id, a->id);
-    if(cmp == 0){
-	return a;
+    if(cmp == 0){    //trouvé
+		return a;
     }
     if(cmp < 0){
-	return rechercherNoeud(a->fg, id);
+		return rechercherNoeud(a->fg, id);     //recherche sous-arbre gauche
     }
-    return rechercherNoeud(a->fd, id);
+    	return rechercherNoeud(a->fd, id);     //recherche sous-arbre droit
 }
 
+//max entre deux nombres
 int max(int a, int b){
 	if(a >= b){
 		return a;
@@ -49,6 +52,7 @@ int max(int a, int b){
 	return b;
 }
 
+//min entre deux nombres
 int min(int a,int b){
 	if(a <= b){
 		return a;
@@ -56,6 +60,7 @@ int min(int a,int b){
 	return b;
 }
 
+//Rotation droite
 pArbre rotationDroite(pArbre a){
 	if(a == NULL || a->fg == NULL){
 		 return a;
@@ -74,6 +79,7 @@ pArbre rotationDroite(pArbre a){
 	return a;
 }
 
+//Rotation gauche
 pArbre rotationGauche(pArbre a){
 	if(a == NULL || a->fd == NULL){
                  return a;
@@ -92,6 +98,7 @@ pArbre rotationGauche(pArbre a){
 	return a;
 }
 
+//Double rotation gauche
 pArbre doubleRotationGauche(pArbre a){
 	if(a == NULL){
 		exit(1);
@@ -100,6 +107,7 @@ pArbre doubleRotationGauche(pArbre a){
 	return rotationGauche(a);
 }
 
+//Double rotation droite
 pArbre doubleRotationDroite(pArbre a){
 	if(a == NULL){
 		exit(1);
@@ -109,7 +117,7 @@ pArbre doubleRotationDroite(pArbre a){
 }
 
 
-
+//Equilibrage de l'avl
 pArbre equilibreAVL(pArbre a){
 	if(a == NULL){
 		exit(1);
@@ -133,17 +141,18 @@ pArbre equilibreAVL(pArbre a){
 	return a;
 }
 
+//Insertion d'un noeud dans l'avl
 pArbre insertionAVL(pArbre a, char* identifiant, Usine* u, int* h){
 	if(a == NULL){
 		*h = 1;
 		return creerArbre(identifiant, *u);
 	}
 	if(strcmp(a->id, identifiant) > 0){
-		a->fg = insertionAVL(a->fg, identifiant, u, h);
+		a->fg = insertionAVL(a->fg, identifiant, u, h);     //insertion sous-arbre gauche
 		*h = -*h;
 	}
 	else if(strcmp(identifiant, a->id) > 0){
-		a->fd = insertionAVL(a->fd, identifiant, u, h);
+		a->fd = insertionAVL(a->fd, identifiant, u, h);     //insertion sous-arbre droit
 	}
 	else{
 		*h = 0;
@@ -151,7 +160,7 @@ pArbre insertionAVL(pArbre a, char* identifiant, Usine* u, int* h){
 	}
 	if(*h != 0){
 		a->equilibre += *h;
-		a = equilibreAVL(a);
+		a = equilibreAVL(a);      //équilibrage de l'avl
 		if(a->equilibre == 0){
 			*h = 0;
 		}
@@ -162,6 +171,7 @@ pArbre insertionAVL(pArbre a, char* identifiant, Usine* u, int* h){
 	return a;
 }
 
+//Création noeud dans avl pour fuites 
 AVL_fuites* creerAVLfuites(char* identifiant, Arbre_fuite* element){
 	AVL_fuites* nv = malloc(sizeof(AVL_fuites));
 	if(nv == NULL){
@@ -175,19 +185,21 @@ AVL_fuites* creerAVLfuites(char* identifiant, Arbre_fuite* element){
 	return nv;
 }
 
+//Recherche noeud dans avl fuites
 AVL_fuites* rechercheAVLfuites(AVL_fuites* a, char* identifiant){
 	if(a == NULL){
 		return NULL;
 	}
-	if(strcmp(a->id, identifiant) == 0){
+	if(strcmp(a->id, identifiant) == 0){     //trouvé
 		return a;
 	}
 	if(strcmp(a->id, identifiant) > 0){
-		return rechercheAVLfuites(a->fg, identifiant);
+		return rechercheAVLfuites(a->fg, identifiant);       //recherche sous-arbre gauche
 	}
-	return rechercheAVLfuites(a->fd, identifiant);
+	return rechercheAVLfuites(a->fd, identifiant);       //recherche sous-arbre droit
 }
 
+//Rotation droite pour avl fuites
 AVL_fuites* rotationDroiteAVLfuites(AVL_fuites* a){
 	AVL_fuites* pivot;
 	int eq_a;
@@ -203,6 +215,7 @@ AVL_fuites* rotationDroiteAVLfuites(AVL_fuites* a){
 	return a;
 }
 
+//Rotation gauche pour avl fuites
 AVL_fuites* rotationGaucheAVLfuites(AVL_fuites* a){
 	AVL_fuites* pivot;
 	int eq_a;
@@ -218,6 +231,7 @@ AVL_fuites* rotationGaucheAVLfuites(AVL_fuites* a){
 	return a;
 }
 
+//Double rotation gauche pour avl fuites
 AVL_fuites* doubleRotationGaucheAVLfuites(AVL_fuites* a){
 	if(a == NULL){
 		exit(1);
@@ -226,6 +240,7 @@ AVL_fuites* doubleRotationGaucheAVLfuites(AVL_fuites* a){
 	return rotationGaucheAVLfuites(a);
 }
 
+//Double rotation droite pour avl fuites
 AVL_fuites* doubleRotationDroiteAVLfuites(AVL_fuites* a){
 	if(a == NULL){
 		exit(1);
@@ -234,6 +249,7 @@ AVL_fuites* doubleRotationDroiteAVLfuites(AVL_fuites* a){
 	return rotationDroiteAVLfuites(a);
 }
 
+//Equilibrage avl pour avl fuites
 AVL_fuites* equilibreAVLfuites(AVL_fuites* a){
 	if(a == NULL){
 		exit(1);
@@ -257,6 +273,7 @@ AVL_fuites* equilibreAVLfuites(AVL_fuites* a){
 	return a;
 }
 
+//Insertion noeud dans avl fuites
 AVL_fuites* insertionAVLfuites(AVL_fuites* a, char* identifiant, Arbre_fuite* element, int* h){
 	if(a == NULL){
 		*h = 1;
@@ -275,7 +292,7 @@ AVL_fuites* insertionAVLfuites(AVL_fuites* a, char* identifiant, Arbre_fuite* el
 	}
 	if(*h != 0){
 		a->equilibre += *h;
-		a = equilibreAVLfuites(a);
+		a = equilibreAVLfuites(a);      //équilibrage
 		if(a->equilibre == 0){
 			*h = 0;
 		}
