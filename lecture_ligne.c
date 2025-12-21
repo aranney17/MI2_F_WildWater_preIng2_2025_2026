@@ -19,7 +19,7 @@ Type_ligne detecter_type(char* col1, char* col2, char* col3){
     return INCONNU; //inconnu ou inutil
 }
 
-void nettoyer(char *s){
+/*void nettoyer(char *s){
     if(!s) return;
     char *p = s;
     while(*p){
@@ -29,36 +29,7 @@ void nettoyer(char *s){
         }
         p++;
     }
-}
-
-/*Type_ligne detecter_type(char* col1, char* col2, char* col3){
-    if(!col1 || !col2 || !col3){
-        return INCONNU;
-    }
-
-    // SOURCE -> USINE 
-    if(col1[0] == '-' && col2[0] != '-' && col3[0] != '-'){
-        return SOURCE_USINE;
-    }
-
-    // USINE seule
-    if(col1[0] == '-' && col2[0] != '-' && col3[0] == '-'){
-        return USINE;
-    }
-
-    // USINE -> STOCKAGE
-    if(col1[0] == '-' && col2[0] != '-' && col3[0] != '-' ){
-        return USINE_STOCKAGE;
-    }
-
-    // STOCKAGE -> JONCTION
-    if(col1[0] != '-' && col2[0] != '-' && col3[0] != '-'){
-        return STOCKAGE_JONCTION;
-    }
-
-    return INCONNU;
 }*/
-
 
 // stocker les informations d'une ligne
 Ligne stockage_ligne(char* buffer){
@@ -75,7 +46,7 @@ Ligne stockage_ligne(char* buffer){
         else{
                 strcpy(ligne.col1, "");   // on ne met rien 
         }
-	nettoyer(ligne.col1);
+//	nettoyer(ligne.col1);
 
         tmp = strtok(NULL, ";");
         if(tmp != NULL){
@@ -84,7 +55,7 @@ Ligne stockage_ligne(char* buffer){
         else{
                 strcpy(ligne.col2, "");
         }
-	nettoyer(ligne.col2);
+	//nettoyer(ligne.col2);
         tmp = strtok(NULL, ";");
         if(tmp != NULL){
                 strcpy(ligne.col3, tmp);
@@ -92,7 +63,7 @@ Ligne stockage_ligne(char* buffer){
         else{
                 strcpy(ligne.col3, "");
         }
-	nettoyer(ligne.col3);
+	//nettoyer(ligne.col3);
 
         tmp = strtok(NULL, ";");
         if(tmp != NULL){
