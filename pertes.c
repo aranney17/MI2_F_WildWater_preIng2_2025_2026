@@ -57,7 +57,7 @@ double rendement(AVL_fuites* avl, char* id_usine){
     return pertes;
 }
 
-//Procédure qui écrit les résultat dans le fichier rendements
+//Procédure qui écrit les résultats dans le fichier rendements
 void Historique(char* id_usine,float pertes){
     //Gestion de l'ouverture du fichier
     FILE* f=fopen("rendements.dat","a");
