@@ -26,25 +26,25 @@ ORGANISATION DU PROJET
   
   histogramme.h : contient les prototypes des fonctions et des procédures permettant de parcourir les AVL et de générer les fichiers nécessaires aux histogrammes.
   
-  pertes.h : contient les prototypes des fonctions de calcul du rendement et de l’historique de ces calculs.
+  `pertes.h` : contient les prototypes des fonctions de calcul du rendement et de l’historique de ces calculs.
   
-  arbre.c : construit l’arbre de fuites à partir du fichier de données.
+  `arbre.c` : construit l’arbre de fuites à partir du fichier de données.
   
-  avl.c : implémente les opérations sur les arbres AVL (insertions, rotations, équilibrage).
+  `avl.c` : implémente les opérations sur les arbres AVL (insertions, rotations, équilibrage).
   
-  lecture_ligne.c : analyse et stocke les lignes du fichier de données et leur type.
+  `lecture_ligne.c` : analyse et stocke les lignes du fichier de données et leur type.
   
-  histogramme.c : parcourt l’AVL, calcule les volumes par usine et génère les fichiers .dat pour les histogrammes.
+  `histogramme.c` : parcourt l’AVL, calcule les volumes par usine et génère les fichiers .dat pour les histogrammes.
   
-  pertes.c : calcule les pertes d’eau récursivement dans le réseau et les écrit dans l’historique.
+  `pertes.c` : calcule les pertes d’eau récursivement dans le réseau et les écrit dans l’historique.
   
-  main.c : point d’entrée du programme, gère les arguments et appelle les fonctionnalités principales.
+  `main.c` : point d’entrée du programme, gère les arguments et appelle les fonctionnalités principales.
   
-  makefile : permet de compiler rapidement le projet.
+  `makefile` : permet de compiler rapidement le projet.
   
-  script.sh : script Bash facilitant l’exécution du programme et la génération des histogrammes.
+  `script.sh` : script Bash facilitant l’exécution du programme et la génération des histogrammes.
   
-  histo.gp : script gnuplot pour produire les histogrammes à partir des fichiers .dat.
+  `histo.gp` : script gnuplot pour produire les histogrammes à partir des fichiers .dat.
 
 LANCER LE PROGRAMME
 
@@ -55,7 +55,12 @@ LANCER LE PROGRAMME
 3. Lancer le programme avec l'executable :
    
   Pour la génération d’histogrammes :
+  ```bash
   bash script.sh <fichier_donnees> histo {max|src|real}
+  ```
+  Il faut toujours exécuter histo max avant src ou real car il est nécessaire pour construire les autres histogrammes
   
   Pour l’analyse des pertes :
+  ```bash
   bash script.sh <fichier_donnees> leaks <identifiant_usine>
+  ```
