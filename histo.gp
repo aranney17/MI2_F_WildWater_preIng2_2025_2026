@@ -1,12 +1,11 @@
 set terminal png size 1200,600
-set output "histogramme_source.png"
-set datafile separator ";"
+set output outfile
 
-# Style histogramme
+set datafile separator ";"
 set style data histograms
-set style fill solid 1.0 border -1   # Rempli complètement avec bordure automatique
+set style fill solid 1.0 border -1
 set boxwidth 0.8
 set xtics rotate by -45
+set key off
 
-# Tracer le fichier
-plot "vol_captation.dat" using 2:xtic(1) title ""
+plot infile using 2:xtic(1)
