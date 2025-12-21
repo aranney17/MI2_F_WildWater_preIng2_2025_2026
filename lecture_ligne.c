@@ -68,12 +68,12 @@ Ligne stockage_ligne(char* buffer){
         Ligne ligne;
         char* tmp;
 
-        tmp = strtok(buffer, ";");
+        tmp = strtok(buffer, ";");       //stocke jusqu'à ";"
         if(tmp != NULL){
                 strcpy(ligne.col1, tmp);
         }
         else{
-                strcpy(ligne.col1, ""); // on ne met rien 
+                strcpy(ligne.col1, "");   // on ne met rien 
         }
 	nettoyer(ligne.col1);
 
