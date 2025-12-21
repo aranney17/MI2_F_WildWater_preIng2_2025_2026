@@ -4,7 +4,7 @@
 
 pArbre parcours(pArbre a, const char* fichier_donnees){
     char buffer[255];
-    FILE* fichier = fopen(fichier_donnees,"r");
+    FILE* fichier = fopen(fichier_donnees, "r");
     if(fichier == NULL){
         exit(1);
     }
@@ -15,45 +15,48 @@ pArbre parcours(pArbre a, const char* fichier_donnees){
         ligne = stockage_ligne(buffer);
 
         if(ligne.type == USINE){
-        printf("id trouvé %s \n", ligne.col2);
-         pArbre n = rechercherNoeud(a, ligne.col2);
-          if(n != NULL){
-          	 n->usine->vol_max = ligne.volume;
-          }
-            else{Usine u;
-            u.id = malloc(strlen(ligne.col2) + 1);
-            strcpy(u.id, ligne.col2);
-            u.vol_max = ligne.volume;
-            u.vol_capte = 0;
-            u.vol_reel = 0;
+            printf("id trouvé %s   ,    %lf \n", ligne.col2, ligne.volume);
 
-            int h = 0;
-            a = insertionAVL(a, ligne.col2, &u, &h);}
+            pArbre n = rechercherNoeud(a, ligne.col2);
+            if(n != NULL){
+                n->usine->vol_max = ligne.volume;
+            } else {
+                Usine u;
+                u.id = malloc(strlen(ligne.col2) + 1);
+                strcpy(u.id, ligne.col2);
+                u.vol_max = ligne.volume;
+		printf(" %lf \n", u.vol_max);
+                u.vol_capte = 0;
+                u.vol_reel = 0;
+
+                int h = 0;
+                a = insertionAVL(a, ligne.col2, &u, &h);
+            }
         }
         else if(ligne.type == SOURCE_USINE){
-        	  printf("id trouvé %s \n", ligne.col3);
+//            printf("id trouvé %s \n", ligne.col3);
+
             pArbre n = rechercherNoeud(a, ligne.col3);
             if(n != NULL){
                 n->usine->vol_capte += ligne.volume;
-                n->usine->vol_reel += ligne.volume * (1 - ligne.pertes/100);
-            }
-            /*else{
-            Usine u;
-            u.id = malloc(strlen(ligne.col3) + 1);
-            strcpy(u.id, ligne.col3);
-            u.vol_max = 0;
-            u.vol_capte = ligne.volume;
-            u.vol_reel = ligne.volume * (1 - ligne.pertes/100);
+                n->usine->vol_reel += ligne.volume * (1 - ligne.pertes / 100);
+            } else {
+                Usine u;
+                u.id = malloc(strlen(ligne.col3) + 1);
+                strcpy(u.id, ligne.col3);
+                u.vol_capte = ligne.volume;
+                u.vol_reel = ligne.volume * (1 - ligne.pertes / 100);
 
-            int h = 0;
-            a = insertionAVL(a, ligne.col3, &u, &h);
-            }*/
+                int h = 0;
+                a = insertionAVL(a, ligne.col3, &u, &h);
+            }
         }
     }
 
     fclose(fichier);
     return a;
 }
+
 
 void remplir_infixe(pArbre a, const char* mode, FILE *fmax){
     if(a == NULL){
@@ -98,7 +101,7 @@ void generer_fichier_max(pArbre a, const char* mode){
 
     fprintf(fmax,  "identifiant;volume max (k.m3.year-1)\n");
 
-    remplir_infixe(a, mode,fmax);
+    remplir_infixe(a, mode, fmax);
 
     fclose(fmax);
 }
@@ -127,6 +130,7 @@ void generer_fichier_real(pArbre a, const char* mode){
     fprintf(freal, "identifiant;volume traité (k.m3.year-1)\n");
 
     remplir_infixe(a, mode, freal);
+    printf("Ecriture usine %s\n", a->id);
 
     fclose(freal);
 }
@@ -134,6 +138,8 @@ void generer_fichier_real(pArbre a, const char* mode){
 void traitement_histogramme(const char* fichier_donnees, const char* mode){
     pArbre a = NULL;
     a = parcours(a, fichier_donnees);
+    printf("Parcours terminé\n");
+
     if(strcmp(mode, "max") == 0){
          generer_fichier_max(a, mode);
     }
@@ -144,3 +150,4 @@ void traitement_histogramme(const char* fichier_donnees, const char* mode){
          generer_fichier_real(a, mode);
     }
 }
+
