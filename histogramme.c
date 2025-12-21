@@ -19,12 +19,12 @@ pArbre parcours(pArbre a, const char* fichier_donnees){
 
             pArbre n = rechercherNoeud(a, ligne.col2);
             if(n != NULL){
-                n->usine->vol_max = ligne.volume;
+                n->usine->vol_max = ligne.volume /1000;
             } else {
                 Usine u;
                 u.id = malloc(strlen(ligne.col2) + 1);
                 strcpy(u.id, ligne.col2);
-                u.vol_max = ligne.volume;
+                u.vol_max = ligne.volume / 1000;
 		printf(" %lf \n", u.vol_max);
                 u.vol_capte = 0;
                 u.vol_reel = 0;
@@ -38,14 +38,14 @@ pArbre parcours(pArbre a, const char* fichier_donnees){
 
             pArbre n = rechercherNoeud(a, ligne.col3);
             if(n != NULL){
-                n->usine->vol_capte += ligne.volume;
-                n->usine->vol_reel += ligne.volume * (1 - ligne.pertes / 100);
+                n->usine->vol_capte += ligne.volume / 1000;
+                n->usine->vol_reel += (ligne.volume * (1 - ligne.pertes / 100)) / 1000;
             } else {
                 Usine u;
                 u.id = malloc(strlen(ligne.col3) + 1);
                 strcpy(u.id, ligne.col3);
-                u.vol_capte = ligne.volume;
-                u.vol_reel = ligne.volume * (1 - ligne.pertes / 100);
+                u.vol_capte = ligne.volume / 1000;
+                u.vol_reel = ligne.volume * (1 - ligne.pertes / 100) / 1000;
 
                 int h = 0;
                 a = insertionAVL(a, ligne.col3, &u, &h);
@@ -99,7 +99,7 @@ void generer_fichier_max(pArbre a, const char* mode){
         exit(1);
     }
 
-    fprintf(fmax,  "identifiant;volume max (k.m3.year-1)\n");
+    fprintf(fmax,  "identifiant;volume max (M.m3.year-1)\n");
 
     remplir_infixe(a, mode, fmax);
 
@@ -113,7 +113,7 @@ void generer_fichier_src(pArbre a, const char* mode){
         exit(1);
     }
 
-    fprintf(fcap,  "identifiant;volume capté (k.m3.year-1)\n");
+    fprintf(fcap,  "identifiant;volume capté (M.m3.year-1)\n");
 
     remplir_infixe(a, mode, fcap);
 
@@ -127,7 +127,7 @@ void generer_fichier_real(pArbre a, const char* mode){
         exit(1);
     }
 
-    fprintf(freal, "identifiant;volume traité (k.m3.year-1)\n");
+    fprintf(freal, "identifiant;volume traité (M.m3.year-1)\n");
 
     remplir_infixe(a, mode, freal);
     printf("Ecriture usine %s\n", a->id);
@@ -150,4 +150,3 @@ void traitement_histogramme(const char* fichier_donnees, const char* mode){
          generer_fichier_real(a, mode);
     }
 }
-
