@@ -2,7 +2,7 @@
 set -e
 
 # Mesure du temps
-START=$(date +%s)
+START=$(date +%s%3N)
 
 # Vérification nombre d’arguments
 if [ $# -lt 2 ]; then
@@ -93,8 +93,8 @@ case "$COMMAND" in
 
 
 	# Gnuplot
-	gnuplot -e "infile='petites_${DAT}.dat'; outfile='petites_${DAT}.png'" histo.gp
-	gnuplot -e "infile='grandes_${DAT}.dat'; outfile='grandes_${DAT}.png'" histo.gp
+	gnuplot -e "infile='petites_${DAT}.dat'; outfile='petites_${DAT}.png'; mode='${OPTION}'" histo.gp
+	gnuplot -e "infile='grandes_${DAT}.dat'; outfile='grandes_${DAT}.png'; mode='${OPTION}'" histo.gp
 
 	echo "Histogrammes générés pour $1"
 	;;
@@ -121,8 +121,8 @@ case "$COMMAND" in
 esac
 
 # Affichage du temps total
-END=$(date +%s)
+END=$(date +%s%3N)
 DURATION=$((END - START))
 
-echo "Durée totale du script : ${DURATION} secondes"
+echo "Durée totale du script : ${DURATION} millisecondes"
 
