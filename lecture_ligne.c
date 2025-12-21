@@ -1,34 +1,8 @@
 #include "lecture_ligne.h"
 
-	/*
 
-Type_ligne detecter_type(char* col1, char *col2, char* col3){
-        if(col2 == NULL || col3 == NULL){
-                return INCONNU;
-        }
-        if(col1[0] == '-' && col2[0] != '-' && col3[0] != '-' ){
-                return SOURCE_USINE;
-        }
-        if(col1[0] == '-' && col2[0] != '-' && col3[0] == '-'){
-                return USINE;
-        }
-        if(col1[0] == '-' && col2[0] != '-' && strstr(col3, "Storage")){
-                return USINE_STOCKAGE;
-        }
-        if(strstr(col2, "Storage") && strstr(col3, "Junction")){
-                return STOCKAGE_JONCTION;
-        }
-        if(strstr(col2, "Junction") && strstr(col3, "Service")){
-                return JONCTION_RACC;
-        }
-        if(strstr(col2, "Service") && strstr(col3, "Cust")){
-                return RACC_USAGER;
-        }
-        return INCONNU;
-}
 
-*/
-
+//Trouver le type de ligne
 Type_ligne detecter_type(char* col1, char* col2, char* col3){
     if(!col1 || !col2 || !col3){
         return INCONNU;
@@ -42,7 +16,7 @@ Type_ligne detecter_type(char* col1, char* col2, char* col3){
         return SOURCE_USINE;
     }
 
-    return INCONNU;
+    return INCONNU; //inconnu ou inutil
 }
 
 void nettoyer(char *s){
@@ -86,7 +60,7 @@ void nettoyer(char *s){
 }*/
 
 
-
+// stocker les informations d'une ligne
 Ligne stockage_ligne(char* buffer){
 	if(buffer == NULL){
 		exit(1);
@@ -99,18 +73,16 @@ Ligne stockage_ligne(char* buffer){
                 strcpy(ligne.col1, tmp);
         }
         else{
-                strcpy(ligne.col1, "");
+                strcpy(ligne.col1, ""); // on ne met rien 
         }
 	nettoyer(ligne.col1);
 
         tmp = strtok(NULL, ";");
         if(tmp != NULL){
                 strcpy(ligne.col2, tmp);
-				//printf("COL2 = [%s]\n", ligne.col2);
         }
         else{
                 strcpy(ligne.col2, "");
-				//printf("COL2 = [%s]\n", ligne.col2);
         }
 	nettoyer(ligne.col2);
         tmp = strtok(NULL, ";");
@@ -124,7 +96,7 @@ Ligne stockage_ligne(char* buffer){
 
         tmp = strtok(NULL, ";");
         if(tmp != NULL){
-                ligne.volume = atof(tmp);
+                ligne.volume = atof(tmp); // conversion char* en double
         }
         else{
                 ligne.volume = 0;
