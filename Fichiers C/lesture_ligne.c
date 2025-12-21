@@ -51,7 +51,7 @@
         return INCONNU;
 }*/
 
-Type_ligne detecter_type(char* col1, char *col2, char* col3){
+/*Type_ligne detecter_type(char* col1, char *col2, char* col3){
         if(col2 == NULL || col3 == NULL){
                 return INCONNU;
         }
@@ -75,7 +75,7 @@ Type_ligne detecter_type(char* col1, char *col2, char* col3){
         }
         return INCONNU;
 }
-
+*/
 
 /*Ligne stockage_ligne(FILE* fichier){
 	
@@ -94,6 +94,66 @@ Type_ligne detecter_type(char* col1, char *col2, char* col3){
 	
 }*/
 
+/*Type_ligne detecter_type(char* col1, char* col2, char* col3){
+    if(!col1 || !col2 || !col3){
+        return INCONNU;
+    }
+
+    if(col1[0] == '-' && col2[0] != '-' && col3[0] == '-'){
+        return USINE;
+    }
+
+    if(col1[0] == '-' && col2[0] != '-' && col3[0] != '-'){
+        return SOURCE_USINE;
+    }
+
+    return INCONNU;
+}
+*/
+
+int est_tiret(const char* s){
+    if(!s) return 0;
+    while(*s == ' ') s++;
+    return (strcmp(s, "-") == 0);
+}
+
+
+
+Type_ligne detecter_type(char* col1, char* col2, char* col3){
+    if(!col1 || !col2 || !col3){
+        return INCONNU;
+    }
+
+    int c1_tiret = est_tiret(col1);
+    int c2_tiret = est_tiret(col2);
+    int c3_tiret = est_tiret(col3);
+
+    /* Déclaration d’une usine */
+    if(c1_tiret && !c2_tiret && c3_tiret){
+        return USINE;
+    }
+
+    /* Source → Usine */
+    if(c1_tiret && !c2_tiret && !c3_tiret){
+        return SOURCE_USINE;
+    }
+
+    return INCONNU;
+}
+
+void nettoyer(char *s){
+    if(!s) return;
+    char *p = s;
+    while(*p){
+        if(*p == '\n' || *p == '\r'){
+            *p = '\0';
+            return;
+        }
+        p++;
+    }
+}
+
+
 Ligne stockage_ligne(char* buffer){
 	if(buffer == NULL){
 		exit(1);
@@ -108,6 +168,7 @@ Ligne stockage_ligne(char* buffer){
         else{
                 strcpy(ligne.col1, "");
         }
+	nettoyer(ligne.col1);
 
         tmp = strtok(NULL, ";");
         if(tmp != NULL){
@@ -118,6 +179,7 @@ Ligne stockage_ligne(char* buffer){
                 strcpy(ligne.col2, "");
 				//printf("COL2 = [%s]\n", ligne.col2);
         }
+	nettoyer(ligne.col2);
         tmp = strtok(NULL, ";");
         if(tmp != NULL){
                 strcpy(ligne.col3, tmp);
@@ -125,6 +187,8 @@ Ligne stockage_ligne(char* buffer){
         else{
                 strcpy(ligne.col3, "");
         }
+	nettoyer(ligne.col3);
+
         tmp = strtok(NULL, ";");
         if(tmp != NULL){
                 ligne.volume = atof(tmp);
