@@ -34,7 +34,7 @@ pArbre parcours(pArbre a, const char* fichier_donnees){
             }
         }
         else if(ligne.type == SOURCE_USINE){
-//            printf("id trouvé %s \n", ligne.col3);
+            printf("id trouvé %s \n", ligne.col3);
 
             pArbre n = rechercherNoeud(a, ligne.col3);
             if(n != NULL){
@@ -62,9 +62,9 @@ void remplir_infixe(pArbre a, const char* mode, FILE *fmax){
     if(a == NULL){
         return;
     }
-	
+
     remplir_infixe(a->fg, mode,fmax);
-    
+
     if(strcmp(mode, "max") == 0){
         fprintf(fmax,  "%s;%lf\n", a->id, a->usine->vol_max);
     }
