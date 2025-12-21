@@ -28,22 +28,24 @@ typedef struct arbre {
 // Déclaration anticipée de Arbre_fuite
 typedef struct Arbre_fuite Arbre_fuite;
 
+//Structure d'un chaînon qui représente un tronçon d'un élément du réseau
 typedef struct Chainon {
-    Arbre_fuite* noeud;   // pointeur vers Arbre_fuite
+    Arbre_fuite* noeud; // pointeur vers Arbre_fuite
     double fuite;
     struct Chainon* suivant;
 } Chainon;
 
+//Structure de l'arbre fuite qui représente un élement du réseau
 struct Arbre_fuite {
     char* id;
     double volume;
-    Chainon* fils;        // pointeur vers la liste de Chainon
+    Chainon* fils; // pointeur vers la liste chaînée
 };
 
-
+//Structure de l'AVL des fuites
 typedef struct AVL_fuites{
 	char* id;
-	struct Arbre_fuite* elmt;
+	struct Arbre_fuite* elmt; // pointeur vers un élément de l'arbre fuite
 	struct AVL_fuites* fd;
 	struct AVL_fuites* fg;
 	int equilibre;
@@ -53,7 +55,7 @@ typedef struct arbre* pArbre;
 
 
 
-
+//Prototypes
 pArbre creerArbre(char* identifiant, Usine u);
 pArbre rechercherNoeud(pArbre a, char *id);
 int max(int a, int b);
