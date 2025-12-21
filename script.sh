@@ -46,9 +46,16 @@ case "$COMMAND" in
             exit 1
         fi
 
-        case "$OPTION" in
-            max|src|real)
-                ;;
+	case "$OPTION" in
+            max)
+        	DAT="vol_max"
+        	;;
+    	    src)
+        	DAT="vol_captation"
+        	;;
+    	    real)
+        	DAT="vol_traitement"
+        	;;
             *)
                 echo "Erreur : option histo invalide ($OPTION)"
                 echo "Options possibles : max | src | real"
@@ -64,10 +71,34 @@ case "$COMMAND" in
             exit 1
         fi
 
-        # Génération histogrammes avec gnuplot
-        gnuplot -e "mode='$OPTION'" histo.gp
-        ;;
+	# Tri par volume max
+	sort -t';' -k2,2n "vol_max.dat" > vol_max_trie.dat
 
+	head -n 51 vol_max_trie.dat | tail -n 50 | cut -d';' -f1 > ids_petites.txt
+	tail -n 10 vol_max_trie.dat | cut -d';' -f1 > ids_grandes.txt
+
+	filtrer_par_ids() {
+    		local ids="$1"
+    		local src="$2"
+		local out="$3"
+
+    	awk -F';' 'NR==FNR {ids[$0]; next} ($1 in ids)' "$ids" "$src" > "$out"
+	}
+
+	filtrer_par_ids ids_petites.txt vol_max.dat        petites_vol_max.dat
+	filtrer_par_ids ids_petites.txt vol_captation.dat petites_vol_captation.dat
+	filtrer_par_ids ids_petites.txt vol_traitement.dat petites_vol_traitement.dat
+
+	filtrer_par_ids ids_grandes.txt vol_max.dat        grandes_vol_max.dat
+	filtrer_par_ids ids_grandes.txt vol_captation.dat grandes_vol_captation.dat
+	filtrer_par_ids ids_grandes.txt vol_traitement.dat grandes_vol_traitement.dat
+
+	# Gnuplot
+	gnuplot -e "infile='${DAT}_petites.dat'; outfile='${DAT}_petites.png'" histo.gp
+	gnuplot -e "infile='${DAT}_grandes.dat'; outfile='${DAT}_grandes.png'" histo.gp
+
+	echo "Histogrammes générés pour $1"
+	;;
     leaks)
         # leaks nécessite 3 arguments
         if [ $# -ne 3 ]; then
@@ -95,5 +126,6 @@ END=$(date +%s)
 DURATION=$((END - START))
 
 echo "Durée totale du script : ${DURATION} secondes"
+
 
 
