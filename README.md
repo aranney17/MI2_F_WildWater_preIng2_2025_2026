@@ -54,8 +54,8 @@ LANCER LE PROGRAMME
 
 3. Lancer le programme avec l'executable :
    
-  Pour la génération d’histogrammes:
+  Pour la génération d’histogrammes :
   bash script.sh <fichier_donnees> histo {max|src|real}
   
-  Pour l’analyse des pertes:
+  Pour l’analyse des pertes :
   bash script.sh <fichier_donnees> leaks <identifiant_usine>
