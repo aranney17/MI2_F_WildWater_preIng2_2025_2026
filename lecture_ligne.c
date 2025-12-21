@@ -91,8 +91,8 @@ Ligne stockage_ligne(FILE* fichier){
 	ligne.type = detecter_type(ligne.col2, ligne.col3);
 	//printf("%s %s %s %s %s %d",ligne.col1,ligne.col2,ligne.col3,ligne.volume,ligne.leak,ligne.type);
 	return ligne;
-	
-}
+
+}*/
 
 Type_ligne detecter_type(char* col1, char* col2, char* col3){
     if(!col1 || !col2 || !col3){
@@ -103,14 +103,14 @@ Type_ligne detecter_type(char* col1, char* col2, char* col3){
         return USINE;
     }
 
-    if(col1[0] == '-' && col2[0] != '-' && col3[0] != '-'){
+    if(col1[0] == '-' && col2[0] != '-' && !strstr(col3, "Storage") && col3[0] != '-'){
         return SOURCE_USINE;
     }
 
     return INCONNU;
 }
 
-
+/*
 int est_tiret(const char* s){
     if(!s) return 0;
     while(*s == ' ') s++;
@@ -153,33 +153,33 @@ void nettoyer(char *s){
     }
 }
 
-Type_ligne detecter_type(char* col1, char* col2, char* col3){
+/*Type_ligne detecter_type(char* col1, char* col2, char* col3){
     if(!col1 || !col2 || !col3){
         return INCONNU;
     }
 
-    /* SOURCE -> USINE */
+    // SOURCE -> USINE 
     if(col1[0] == '-' && col2[0] != '-' && col3[0] != '-'){
         return SOURCE_USINE;
     }
 
-    /* USINE seule */
+    // USINE seule
     if(col1[0] == '-' && col2[0] != '-' && col3[0] == '-'){
         return USINE;
     }
 
-    /* USINE -> STOCKAGE */
+    // USINE -> STOCKAGE
     if(col1[0] == '-' && col2[0] != '-' && col3[0] != '-' ){
         return USINE_STOCKAGE;
     }
 
-    /* STOCKAGE -> JONCTION */
+    // STOCKAGE -> JONCTION
     if(col1[0] != '-' && col2[0] != '-' && col3[0] != '-'){
         return STOCKAGE_JONCTION;
     }
 
     return INCONNU;
-}
+}*/
 
 
 
@@ -237,3 +237,4 @@ Ligne stockage_ligne(char* buffer){
 
         return ligne;
 }
+
