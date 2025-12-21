@@ -74,7 +74,7 @@ case "$COMMAND" in
 	# Tri par volume max
 	tail -n +2 vol_max.dat | sort -t';' -k2,2n > vol_max_trie.dat
 
-	# Sélection des IDs
+	# Sélection des identifiants
 	head -n 50 vol_max_trie.dat | cut -d';' -f1 > ids_petites.txt
 	tail -n 10 vol_max_trie.dat | cut -d';' -f1 > ids_grandes.txt
 
@@ -92,7 +92,7 @@ case "$COMMAND" in
 	filtrer_par_ids ids_grandes.txt "$SRC_FILE" "grandes_${DAT}.dat"
 
 
-	# Gnuplot
+	# Générer histogrammes avec gnuplot
 	gnuplot -e "infile='petites_${DAT}.dat'; outfile='petites_${DAT}.png'; mode='${OPTION}'" histo.gp
 	gnuplot -e "infile='grandes_${DAT}.dat'; outfile='grandes_${DAT}.png'; mode='${OPTION}'" histo.gp
 
@@ -120,7 +120,7 @@ case "$COMMAND" in
         ;;
 esac
 
-# Affichage du temps total
+# Affichage du temps total en millisecondes
 END=$(date +%s%3N)
 DURATION=$((END - START))
 
